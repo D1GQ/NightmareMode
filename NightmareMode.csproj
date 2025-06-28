@@ -1,0 +1,22 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<TargetFramework>net48</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+		<OutputType>Library</OutputType>
+		<langVersion>preview</langVersion>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<!-- Embed all files in the Resources folder -->
+		<EmbeddedResource Include="Resources\**\*" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Reference Include="References\*.dll" />
+	</ItemGroup>
+
+	<Target Name="PostBuild" AfterTargets="PostBuildEvent">
+		<Exec Command="copy &quot;$(TargetDir)NightmareMode.dll&quot; &quot;C:\Users\yourb\OneDrive\Documents\My Files\File Programs\Games\FNAF Rewritten 87\Mods\NightmareMode - Mod\BepInEx\plugins&quot;" />
+	</Target>
+</Project>

@@ -1,0 +1,131 @@
+﻿using NightmareMode.Helpers;
+using NightmareMode.Items.Attributes;
+using NightmareMode.Items.Enums;
+using NightmareMode.Items.Interfaces;
+using NightmareMode.Monos;
+using NightmareMode.Patches.UI;
+using System.Collections;
+using UnityEngine;
+
+namespace NightmareMode.Managers;
+
+internal static class NightManager
+{
+    internal static readonly string SummaryNote = "Summary... Watch the music box, Mangle’s aggression, Toy duo’s teamwork, and mask timing. Toy Freddy, Foxy and Balloon Boy are threats, and old Freddy and Mangle are slow to leave! ";
+
+    internal static ITimeEvent? Current => !IsChallengeNight ? CurrentNight : CurrentChallenge;
+    internal static INight? CurrentNight;
+    internal static IChallenge? CurrentChallenge;
+    internal static bool IsChallengeNight;
+    internal static int CurrentChallengeId;
+
+    internal static void LoadNightUI()
+    {
+        MenuScriptPatch.SetupNightUi(1, Utils.FindInactive("Canvas/Night1"), "Toy Playtime");
+        MenuScriptPatch.SetupNightUi(2, Utils.FindInactive("Canvas/Night2"), "Old Friends", NightsFlag.Night_1);
+        MenuScriptPatch.SetupNightUi(3, Utils.FindInactive("Canvas/Night3"), "Reunited", NightsFlag.Night_2);
+        MenuScriptPatch.SetupNightUi(4, Utils.FindInactive("Canvas/Night4"), "Break In", NightsFlag.Night_3);
+        MenuScriptPatch.SetupNightUi(5, Utils.FindInactive("Canvas/Night5"), "Happiest Day", NightsFlag.Night_4);
+        // MenuScriptPatch.CreateNight("True 10/20", 6, NightsFlag.Night_5, Utils.LoadSprite("NightmareMode.Resources.Images.night6.png", 100f));
+        MenuScriptPatch.CreateNight("Custom Night", 7, NightsFlag.Night_5, NightType.CustomNight);
+        MenuScriptPatch.CreateNight("Toys Revenge", 1, NightsFlag.Night_5, NightType.Challenge);
+        MenuScriptPatch.CreateNight("Power Outage", 2, NightsFlag.Night_5, NightType.Challenge);
+        MenuScriptPatch.CreateNight("Chaos Shuffle", 3, NightsFlag.Night_5, NightType.Challenge);
+        MenuScriptPatch.CreateNight("Overtime", 4, NightsFlag.Night_5, NightType.Challenge);
+    }
+
+    internal static void Init()
+    {
+        if (!IsChallengeNight)
+        {
+            CurrentNight = RegisterNightAttribute.GetClassInstance(n => n.Night == BrainScript.night);
+            CurrentNight?.InitNight();
+        }
+        else
+        {
+            CurrentChallenge = RegisterChallengeAttribute.GetClassInstance(n => n.ChallengeId == CurrentChallengeId);
+            CurrentChallenge?.InitChallenge();
+        }
+    }
+
+    internal static void Clear()
+    {
+        CurrentNight = null;
+        CurrentChallenge = null;
+        IsChallengeNight = false;
+        CurrentChallengeId = -1;
+        if (BrainScript.night >= 7)
+        {
+            BrainScript.night = PlayerPrefs.GetInt("night", 1);
+        }
+    }
+
+    internal static void OnNewHour(int hour) => Current?.OnHour(hour);
+
+    internal static void OnHalfHour(int hour) => Current?.OnHalfHour(hour);
+
+    internal static void DelayedNightAction(Action action, float seconds)
+    {
+        CatchedSingleton<PauseScript>.Instance?.StartCoroutine(CoDelayedNightAction(action, seconds));
+    }
+
+    private static IEnumerator CoDelayedNightAction(Action action, float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        action.Invoke();
+    }
+
+    internal static void PowerSurge()
+    {
+        var lightss = Utils.FindInactive("Alive/GAMPLAYCOMPONENTS/WinLights");
+        var winLights = UnityEngine.Object.Instantiate(lightss, lightss?.transform.parent);
+        winLights?.transform.Find("Global Volume").gameObject.SetActive(false);
+        float wait = 0.1f;
+        DelayedNightAction(() =>
+        {
+            winLights?.transform.Find("Spot Light").gameObject.SetActive(true);
+            DelayedNightAction(() =>
+            {
+                winLights?.transform.Find("Spot Light (1)").gameObject.SetActive(true);
+                DelayedNightAction(() =>
+                {
+                    winLights?.transform.Find("Spot Light (2)").gameObject.SetActive(true);
+                    DelayedNightAction(() =>
+                    {
+                        winLights?.transform.Find("Spot Light (3)").gameObject.SetActive(true);
+                        DelayedNightAction(() =>
+                        {
+                            winLights?.transform.Find("Spot Light (4)").gameObject.SetActive(true);
+                            DelayedNightAction(() =>
+                            {
+                                winLights?.transform.Find("Spot Light (5)").gameObject.SetActive(true);
+                                DelayedNightAction(() =>
+                                {
+                                    winLights?.transform.Find("Spot Light (6)").gameObject.SetActive(true);
+                                }, wait);
+                            }, wait);
+                        }, wait);
+                    }, wait);
+                }, wait);
+            }, wait);
+        }, wait);
+
+        DelayedNightAction(() =>
+        {
+            UnityEngine.Object.Destroy(winLights);
+            PowerSurgeOut();
+        }, 8f);
+    }
+
+    internal static void PowerSurgeOut(float delay = 4f)
+    {
+        var power = Utils.FindInactive("Alive/GAMPLAYCOMPONENTS/Power");
+        var powerOut = UnityEngine.Object.Instantiate(power, power?.transform.parent);
+        powerOut?.SetActive(true);
+
+        DelayedNightAction(() =>
+        {
+            UnityEngine.Object.Destroy(powerOut);
+        }, delay);
+    }
+}

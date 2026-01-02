@@ -3,9 +3,9 @@ using NightmareMode.Items.Attributes;
 using NightmareMode.Items.Enums;
 using NightmareMode.Items.Interfaces;
 using NightmareMode.Monos;
-using NightmareMode.Patches.UI;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace NightmareMode.Managers;
 
@@ -21,17 +21,37 @@ internal static class NightManager
 
     internal static void LoadNightUI()
     {
-        MenuScriptPatch.SetupNightUi(1, Utils.FindInactive("Canvas/Night1"), "Toy Playtime");
-        MenuScriptPatch.SetupNightUi(2, Utils.FindInactive("Canvas/Night2"), "Old Friends", NightsFlag.Night_1);
-        MenuScriptPatch.SetupNightUi(3, Utils.FindInactive("Canvas/Night3"), "Reunited", NightsFlag.Night_2);
-        MenuScriptPatch.SetupNightUi(4, Utils.FindInactive("Canvas/Night4"), "Break In", NightsFlag.Night_3);
-        MenuScriptPatch.SetupNightUi(5, Utils.FindInactive("Canvas/Night5"), "Happiest Day", NightsFlag.Night_4);
+        NightUI._allNights.Clear();
+        NightUI.Create("Toy Playtime", 1, NightsFlag.None, NightType.Night);
+        NightUI.Create("Old Friends", 2, NightsFlag.Night_1, NightType.Night, GetOriginalNightThumbnail(2));
+        NightUI.Create("Reunited", 3, NightsFlag.Night_2, NightType.Night, GetOriginalNightThumbnail(3));
+        NightUI.Create("Break In", 4, NightsFlag.Night_3, NightType.Night, GetOriginalNightThumbnail(4));
+        NightUI.Create("Happiest Day", 5, NightsFlag.Night_4, NightType.Night, GetOriginalNightThumbnail(5));
         // MenuScriptPatch.CreateNight("True 10/20", 6, NightsFlag.Night_5, Utils.LoadSprite("NightmareMode.Resources.Images.night6.png", 100f));
-        MenuScriptPatch.CreateNight("Custom Night", 7, NightsFlag.Night_5, NightType.CustomNight);
-        MenuScriptPatch.CreateNight("Toys Revenge", 1, NightsFlag.Night_5, NightType.Challenge);
-        MenuScriptPatch.CreateNight("Power Outage", 2, NightsFlag.Night_5, NightType.Challenge);
-        MenuScriptPatch.CreateNight("Chaos Shuffle", 3, NightsFlag.Night_5, NightType.Challenge);
-        MenuScriptPatch.CreateNight("Overtime", 4, NightsFlag.Night_5, NightType.Challenge);
+        NightUI.Create("Custom Night", 7, NightsFlag.Night_5, NightType.CustomNight);
+        NightUI.Create("Toys Revenge", 1, NightsFlag.Night_5, NightType.Challenge);
+        NightUI.Create("Power Outage", 2, NightsFlag.Night_5, NightType.Challenge);
+        NightUI.Create("Chaos Shuffle", 3, NightsFlag.Night_5, NightType.Challenge);
+        NightUI.Create("Overtime", 4, NightsFlag.Night_5, NightType.Challenge);
+    }
+
+    private static Sprite? GetOriginalNightThumbnail(int night)
+    {
+        var nightObj = Utils.FindInactive($"Canvas/NightsPage/Night{night}");
+        if (nightObj != null)
+        {
+            var rawImage = nightObj.transform.Find("RawImage").GetComponentInChildren<RawImage>(true);
+            if (rawImage != null && rawImage.texture != null)
+            {
+                return Sprite.Create(
+                    (Texture2D)rawImage.mainTexture,
+                    new Rect(0, 0, rawImage.texture.width, rawImage.texture.height),
+                    new Vector2(0.5f, 0.5f)
+                );
+            }
+        }
+
+        return null;
     }
 
     internal static void Init()

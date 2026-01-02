@@ -11,24 +11,24 @@ internal static class CustomNightManager
 {
     internal static readonly Dictionary<AITypes, int> AILevels = [];
 
-    internal static void LoadMenu(GameObject nightObj)
+    internal static void LoadMenu(NightUI nightUI)
     {
         _spawnedCharacters.Clear();
         InitLevels();
-        if (nightObj != null)
+        if (nightUI != null)
         {
             int max = NightmarePlugin.CustomNightMaxAILevelAll?.Value ?? 20;
             int maxPuppet = NightmarePlugin.CustomNightMaxAILevelPuppet?.Value ?? 10;
-            CreateCharacter(nightObj, AITypes.FreddyAI, "Toy Freddy", 0, max, LoadPortraitFromSheet((1, 1)));
-            CreateCharacter(nightObj, AITypes.BonnieAI, "Toy Bonnie", 0, max, LoadPortraitFromSheet((2, 1)));
-            CreateCharacter(nightObj, AITypes.ChicaAI, "Toy Chica", 0, max, LoadPortraitFromSheet((3, 1)));
-            CreateCharacter(nightObj, AITypes.MangleAI, "Mangle", 0, max, LoadPortraitFromSheet((4, 1)));
-            CreateCharacter(nightObj, AITypes.BBAI, "BB", 0, max, LoadPortraitFromSheet((5, 1)));
-            CreateCharacter(nightObj, AITypes.PuppetAI, "Puppet", 0, maxPuppet, LoadPortraitFromSheet((1, 2)));
-            CreateCharacter(nightObj, AITypes.WFreddyAI, "Freddy", 0, max, LoadPortraitFromSheet((2, 2)));
-            CreateCharacter(nightObj, AITypes.WBonnieAI, "Bonnie", 0, max, LoadPortraitFromSheet((3, 2)));
-            CreateCharacter(nightObj, AITypes.WChicaAI, "Chica", 0, max, LoadPortraitFromSheet((4, 2)));
-            CreateCharacter(nightObj, AITypes.FOXYAI, "Foxy", 0, max, LoadPortraitFromSheet((5, 2)));
+            CreateCharacter(nightUI, AITypes.FreddyAI, "Toy Freddy", 0, max, LoadPortraitFromSheet((1, 1)));
+            CreateCharacter(nightUI, AITypes.BonnieAI, "Toy Bonnie", 0, max, LoadPortraitFromSheet((2, 1)));
+            CreateCharacter(nightUI, AITypes.ChicaAI, "Toy Chica", 0, max, LoadPortraitFromSheet((3, 1)));
+            CreateCharacter(nightUI, AITypes.MangleAI, "Mangle", 0, max, LoadPortraitFromSheet((4, 1)));
+            CreateCharacter(nightUI, AITypes.BBAI, "BB", 0, max, LoadPortraitFromSheet((5, 1)));
+            CreateCharacter(nightUI, AITypes.PuppetAI, "Puppet", 0, maxPuppet, LoadPortraitFromSheet((1, 2)));
+            CreateCharacter(nightUI, AITypes.WFreddyAI, "Freddy", 0, max, LoadPortraitFromSheet((2, 2)));
+            CreateCharacter(nightUI, AITypes.WBonnieAI, "Bonnie", 0, max, LoadPortraitFromSheet((3, 2)));
+            CreateCharacter(nightUI, AITypes.WChicaAI, "Chica", 0, max, LoadPortraitFromSheet((4, 2)));
+            CreateCharacter(nightUI, AITypes.FOXYAI, "Foxy", 0, max, LoadPortraitFromSheet((5, 2)));
         }
     }
 
@@ -48,12 +48,12 @@ internal static class CustomNightManager
     }
 
     private static GameObject? charactersObj;
-    private static void CreateCharacter(GameObject nightObj, AITypes ai, string name, int minAI, int maxAi, Sprite? portrait = null)
+    private static void CreateCharacter(NightUI nightUI, AITypes ai, string name, int minAI, int maxAi, Sprite? portrait = null)
     {
         if (charactersObj == null)
         {
             charactersObj = new GameObject("Characters");
-            charactersObj.transform.SetParent(nightObj.transform, false);
+            charactersObj.transform.SetParent(nightUI.transform, false);
         }
 
         var characterAI = CreatePrefab(charactersObj.transform);
@@ -86,8 +86,8 @@ internal static class CustomNightManager
         }
     }
 
-    private static readonly List<CustomNightAI_UI> _spawnedCharacters = new List<CustomNightAI_UI>();
-    private static void SortUI(CustomNightAI_UI characterAI)
+    private static readonly List<CustomNightAIUI> _spawnedCharacters = new List<CustomNightAIUI>();
+    private static void SortUI(CustomNightAIUI characterAI)
     {
         _spawnedCharacters.Add(characterAI);
 
@@ -112,13 +112,13 @@ internal static class CustomNightManager
         }
     }
 
-    private static CustomNightAI_UI CreatePrefab(Transform parent)
+    private static CustomNightAIUI CreatePrefab(Transform parent)
     {
-        var prefab = new GameObject("CustomNightAI(Prefab)").AddComponent<CustomNightAI_UI>();
+        var prefab = new GameObject("CustomNightAI(Prefab)").AddComponent<CustomNightAIUI>();
         prefab.transform.SetParent(parent, false);
         prefab.transform.localScale = new Vector3(0.8f, 0.8f, 0.8f);
 
-        var night = Utils.FindInactive("Canvas/Night1");
+        var night = Utils.FindInactive("Canvas/NightsPage/Night1");
         if (night != null)
         {
             var Forward = night.transform.Find("Forward")?.GetComponent<Button>();

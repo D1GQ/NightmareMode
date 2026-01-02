@@ -1,6 +1,5 @@
 ﻿using NightmareMode.Helpers;
 using NightmareMode.Managers;
-using NightmareMode.Patches.UI;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -17,7 +16,7 @@ internal class Debugger : MonoSingleton<Debugger>
         {
             if (Input.GetKey(KeyCode.LeftShift) && Input.GetKeyDown(KeyCode.U))
             {
-                MenuScriptPatch.UnloadAllNights();
+                NightUI.UnloadAllNights();
             }
         }
 

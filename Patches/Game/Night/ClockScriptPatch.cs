@@ -104,7 +104,7 @@ internal class ClockScriptPatch
         {
             __instance.timer = _1Hour;
         }
-        __instance.InvokeMethod(nameof(ClockScript.DisplayTime));
+        __instance.DisplayTime();
         int currentHour = (int)__instance.Hours;
         if (currentHour != lastTrackedHour)
         {

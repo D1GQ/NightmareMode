@@ -19,7 +19,7 @@ internal class NightmarePlugin : BaseUnityPlugin
     internal static NightmarePlugin Instance { get; private set; }
     private const string GUID = "com.d1gq.nightmaremode";
     private const string PluginName = "NightmareMode";
-    private const string Version = "1.6.1";
+    private const string Version = "1.7.0";
     internal const bool isDebug = true;
 
     internal static bool ModEnabled { get; private set; } = isDebug;
@@ -36,8 +36,8 @@ internal class NightmarePlugin : BaseUnityPlugin
         Harmony = new(GUID);
         Harmony.PatchAll();
 
+        Application.runInBackground = true;
         SceneManager.activeSceneChanged += OnSceneChanged;
-
         DataManager.LoadSettings();
         InstanceAttribute.RegisterAll();
     }

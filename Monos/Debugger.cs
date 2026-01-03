@@ -20,7 +20,7 @@ internal class Debugger : MonoSingleton<Debugger>
             }
         }
 
-        if (!NightmarePlugin.isDebug) return;
+        if (!ModInfo.DEBUG) return;
 
         if (SceneManager.GetActiveScene().name == "Nights")
         {
@@ -61,7 +61,7 @@ internal class Debugger : MonoSingleton<Debugger>
 
     private void OnGUI()
     {
-        if (!NightmarePlugin.isDebug) return;
+        if (!ModInfo.DEBUG) return;
 
         string textInfo = "";
 

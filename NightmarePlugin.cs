@@ -13,16 +13,12 @@ using UnityEngine.SceneManagement;
 namespace NightmareMode;
 
 [BepInProcess("FNAFRewritten87")]
-[BepInPlugin(GUID, PluginName, Version)]
+[BepInPlugin(ModInfo.MOD_GUID, ModInfo.MOD_NAME, ModInfo.MOD_VERSION)]
 internal class NightmarePlugin : BaseUnityPlugin
 {
     internal static NightmarePlugin Instance { get; private set; }
-    private const string GUID = "com.d1gq.nightmaremode";
-    private const string PluginName = "NightmareMode";
-    private const string Version = "1.7.0";
-    internal const bool isDebug = true;
 
-    internal static bool ModEnabled { get; private set; } = isDebug;
+    internal static bool ModEnabled { get; private set; } = ModInfo.DEBUG;
     private static Harmony? Harmony;
     internal static ManualLogSource Log => Instance._log;
     private ManualLogSource? _log;
@@ -33,7 +29,7 @@ internal class NightmarePlugin : BaseUnityPlugin
 
         _log = Logger;
         Instance = this;
-        Harmony = new(GUID);
+        Harmony = new(ModInfo.MOD_GUID);
         Harmony.PatchAll();
 
         Application.runInBackground = true;

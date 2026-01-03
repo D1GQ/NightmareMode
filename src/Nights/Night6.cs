@@ -44,8 +44,9 @@ internal class Night6 : INight
         AIManager.PuppetAI?.SetStartTime(0f);
 
         Utils.SetDifficultyAll(10);
-        AIManager.Toy_FreddyAI?.SetDifficulty(18);
-        AIManager.MangleAI?.SetDifficulty(15);
+        AIManager.PuppetAI?.SetDifficulty(8);
+        AIManager.Toy_FreddyAI?.SetDifficulty(15);
+        AIManager.MangleAI?.SetDifficulty(12);
         AIManager.BalloonBoyAI?.SetDifficulty(18);
         AIManager.W_FoxyAI?.SetDifficulty(20);
     }
@@ -54,19 +55,18 @@ internal class Night6 : INight
         AIManager.Toy_BonnieAI?.SetDifficulty(AIManager.Toy_BonnieAI.GetDifficulty() + UnityEngine.Random.Range(-2, 2));
         AIManager.Toy_ChicaAI?.SetDifficulty(AIManager.Toy_ChicaAI.GetDifficulty() + UnityEngine.Random.Range(-2, 2));
 
-        AIManager.Toy_FreddyAI?.SetDifficulty(20);
-        AIManager.MangleAI?.SetDifficulty(18);
+        AIManager.Toy_FreddyAI?.SetDifficulty(18);
+        AIManager.MangleAI?.SetDifficulty(16);
         AIManager.BalloonBoyAI?.SetDifficulty(20);
         AIManager.W_FoxyAI?.SetDifficulty(15);
     }
     public void At_5AM()
     {
         Utils.SetDifficultyAll(5);
-        AIManager.PuppetAI?.SetDifficulty(10);
-        AIManager.Toy_FreddyAI?.SetDifficulty(20);
+        AIManager.PuppetAI?.SetDifficulty(8);
+        AIManager.Toy_FreddyAI?.SetDifficulty(15);
         AIManager.MangleAI?.SetDifficulty(20);
-        AIManager.BalloonBoyAI?.SetDifficulty(20);
-        AIManager.W_FoxyAI?.SetDifficulty(20);
+        AIManager.BalloonBoyAI?.SetDifficulty(10);
     }
     public void OnWin() { }
 }

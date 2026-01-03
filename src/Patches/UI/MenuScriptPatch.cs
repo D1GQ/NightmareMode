@@ -1,7 +1,6 @@
 ﻿using HarmonyLib;
 using NightmareMode.Helpers;
 using NightmareMode.Managers;
-using NightmareMode.Monos;
 using System.Collections;
 using TMPro;
 using UnityEngine;
@@ -45,15 +44,12 @@ internal class MenuScriptPatch
 
         if (!NightmarePlugin.ModEnabled) return;
 
-        /*
-        var Static = Utils.FindInactive("Canvas/Image");
-        if (Static != null)
+        var curtain = GameObject.Find("1983curtain");
+        if (curtain != null)
         {
-            Static.SetActive(true);
-            Static.GetComponent<Image>().color = new(1f, 0f, 0f, 0.01f);
+            var skinnedMeshRenderer = curtain.GetComponentInChildren<SkinnedMeshRenderer>();
+            skinnedMeshRenderer?.material.color = new Color(1f, 0.5f, 0.5f);
         }
-        */
-
 
         // Set particles
         var particles = GameObject.Find("Particle System");
@@ -77,10 +73,7 @@ internal class MenuScriptPatch
 
         // Set 87 logo color
         var quad = GameObject.Find("Quad");
-        if (quad != null)
-        {
-            quad.GetComponent<MeshRenderer>().material.color = new Color(1f, 0.5f, 0.5f);
-        }
+        quad?.GetComponent<MeshRenderer>().material.color = new Color(1f, 0.5f, 0.5f);
 
         // Set music
         var music = GameObject.Find("cinematic/Audio Source (14)");
@@ -106,17 +99,6 @@ internal class MenuScriptPatch
         {
             fnafTMP.transform.localPosition = new(0f, 240f, 0f);
             titleTMP.text += "\nNightmare Mode";
-        }
-
-        var firstNight = Utils.FindInactive("Canvas/NightsPage/Night1");
-        firstNight?.SetActive(false);
-
-        var night6 = Utils.FindInactive("Canvas/NightsPage/Night6");
-        if (night6 != null)
-        {
-            night6.SetActive(false);
-            night6.name = "NightPrefab";
-            NightUI.NightPrefab = night6;
         }
 
         NightManager.LoadNightUI();

@@ -22,6 +22,17 @@ internal static class NightManager
 
     internal static void LoadNightUI()
     {
+        var firstNight = Utils.FindInactive("Canvas/NightsPage/Night1");
+        firstNight?.SetActive(false);
+
+        var night6 = Utils.FindInactive("Canvas/NightsPage/Night6");
+        if (night6 != null)
+        {
+            night6.SetActive(false);
+            night6.name = "NightPrefab";
+            NightUI.NightPrefab = night6;
+        }
+
         NightUI._allNights.Clear();
         NightUI.Create("Toy Playtime", 1, NightsFlag.None, NightType.Night, GetOriginalNightThumbnail(1));
         NightUI.Create("Old Friends", 2, NightsFlag.Night_1, NightType.Night, GetOriginalNightThumbnail(2));

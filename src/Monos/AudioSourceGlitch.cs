@@ -111,9 +111,6 @@ internal class AudioSourceGlitch : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// Triggers a pitch drop effect that will eventually disable the audio source
-    /// </summary>
     internal void TriggerPitchDropAndDisable()
     {
         if (audioSource != null && !isPitchDropping)
@@ -123,9 +120,6 @@ internal class AudioSourceGlitch : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// Resets the audio source to its normal state
-    /// </summary>
     internal void ResetAudioSource()
     {
         if (audioSource == null) return;

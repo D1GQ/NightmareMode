@@ -2,6 +2,7 @@
 using NightmareMode.Items.Attributes;
 using NightmareMode.Items.Enums;
 using NightmareMode.Items.Interfaces;
+using NightmareMode.Modules;
 using NightmareMode.Monos;
 using System.Collections;
 using UnityEngine;

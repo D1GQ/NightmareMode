@@ -3,6 +3,7 @@ using NightmareMode.Helpers;
 using NightmareMode.Items.Attributes;
 using NightmareMode.Items.Enums;
 using NightmareMode.Managers;
+using NightmareMode.Modules;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;

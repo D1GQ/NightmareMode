@@ -4,7 +4,7 @@ using NightmareMode.Items.Attributes;
 using NightmareMode.Items.Enums;
 using NightmareMode.Items.Interfaces;
 using NightmareMode.Managers;
-using NightmareMode.Monos;
+using NightmareMode.Modules;
 using UnityEngine;
 
 namespace NightmareMode.Nights.Challenges;

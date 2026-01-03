@@ -5,6 +5,7 @@ using HarmonyLib;
 using NightmareMode.Data;
 using NightmareMode.Items.Attributes;
 using NightmareMode.Managers;
+using NightmareMode.Modules;
 using NightmareMode.Monos;
 using System.Collections;
 using UnityEngine;

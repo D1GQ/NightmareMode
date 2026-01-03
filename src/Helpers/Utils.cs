@@ -1,6 +1,6 @@
 ﻿using NightmareMode.Items.Enums;
 using NightmareMode.Managers;
-using NightmareMode.Monos;
+using NightmareMode.Modules;
 using System.Collections;
 using System.Reflection;
 using System.Security.Cryptography;

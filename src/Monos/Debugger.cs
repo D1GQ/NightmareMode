@@ -1,5 +1,6 @@
 ﻿using NightmareMode.Helpers;
 using NightmareMode.Managers;
+using NightmareMode.Modules;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 

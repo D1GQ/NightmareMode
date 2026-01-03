@@ -1,10 +1,11 @@
-﻿using UnityEngine;
+﻿#pragma warning disable CS8603
 
-namespace NightmareMode.Monos;
+using UnityEngine;
+
+namespace NightmareMode.Modules;
 
 internal abstract class MonoSingleton<T> : MonoBehaviour where T : MonoSingleton<T>
 {
-    // Tuple with with unused generic to make a unique bool for every singleton.
     private static (T? _null, bool _exists) _wasCreated = (null, false);
 
     private static T? _instance;

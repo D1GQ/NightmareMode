@@ -198,7 +198,7 @@ internal class DataManager
             _settingsData.e_nightsCompleted |= night;
             SaveSettings();
         }
-        internal static void UnSetNightCompleted(NightsFlag night)
+        internal static void UnsetNightCompleted(NightsFlag night)
         {
             _settingsData.e_nightsCompleted &= ~night;
             SaveSettings();
@@ -215,7 +215,7 @@ internal class DataManager
             _settingsData.e_challengesCompleted |= challenge;
             SaveSettings();
         }
-        internal static void UnSetChallengeCompleted(ChallengesFlag challenge)
+        internal static void UnsetChallengeCompleted(ChallengesFlag challenge)
         {
             _settingsData.e_challengesCompleted &= ~challenge;
             SaveSettings();

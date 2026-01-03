@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace NightmareMode.Monos;
+namespace NightmareMode.Modules;
 
 internal static class CatchedSingleton<T> where T : MonoBehaviour
 {

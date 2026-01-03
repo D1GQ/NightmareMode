@@ -109,11 +109,14 @@ internal class MenuScriptPatch
         }
 
         var firstNight = Utils.FindInactive("Canvas/NightsPage/Night1");
-        if (firstNight != null)
+        firstNight?.SetActive(false);
+
+        var night6 = Utils.FindInactive("Canvas/NightsPage/Night6");
+        if (night6 != null)
         {
-            firstNight.SetActive(false);
-            firstNight.name = "NightPrefab";
-            NightUI.NightPrefab = firstNight;
+            night6.SetActive(false);
+            night6.name = "NightPrefab";
+            NightUI.NightPrefab = night6;
         }
 
         NightManager.LoadNightUI();

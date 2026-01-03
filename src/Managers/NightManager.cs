@@ -22,7 +22,7 @@ internal static class NightManager
     internal static void LoadNightUI()
     {
         NightUI._allNights.Clear();
-        NightUI.Create("Toy Playtime", 1, NightsFlag.None, NightType.Night);
+        NightUI.Create("Toy Playtime", 1, NightsFlag.None, NightType.Night, GetOriginalNightThumbnail(1));
         NightUI.Create("Old Friends", 2, NightsFlag.Night_1, NightType.Night, GetOriginalNightThumbnail(2));
         NightUI.Create("Reunited", 3, NightsFlag.Night_2, NightType.Night, GetOriginalNightThumbnail(3));
         NightUI.Create("Break In", 4, NightsFlag.Night_3, NightType.Night, GetOriginalNightThumbnail(4));

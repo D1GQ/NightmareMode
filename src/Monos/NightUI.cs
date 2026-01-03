@@ -32,6 +32,7 @@ internal class NightUI : MonoBehaviour
     {
         if (NightPrefab == null) return null;
         var nightObj = Instantiate(NightPrefab, NightPrefab.transform.parent);
+        Destroy(nightObj.GetComponent<NightLock>());
 
         nightObj.name = nightType != NightType.Challenge ? $"Night{nightOrChallenge}" : $"ChallengeNight({title})";
 
@@ -123,7 +124,7 @@ internal class NightUI : MonoBehaviour
 
     private void SetupPlayButton()
     {
-        var play = transform.Find("Play");
+        var play = transform.Find("Play (1)");
         if (play != null)
         {
             _playButton = play.GetComponentInChildren<Button>();
@@ -162,22 +163,27 @@ internal class NightUI : MonoBehaviour
         else
         {
             var rawImage = transform.Find("RawImage")?.GetComponent<RawImage>();
-            if (rawImage != null)
-            {
-                rawImage.color = new Color(1f, 0.5f, 0.5f);
-            }
+            rawImage?.color = new Color(1f, 0.5f, 0.5f);
         }
 
         foreach (Transform child in gameObject.transform)
         {
-            if (child.name.StartsWith("Goals") || child.name.StartsWith("Locked"))
+            if (child.name.StartsWith("Locked"))
+            {
+                child.Find("Text (TMP) (3)")?.GetComponentInChildren<TextMeshProUGUI>(false).SetText(GetUnlockTip());
+                continue;
+            }
+
+            if (child.name.StartsWith("Goals"))
             {
                 child.gameObject.SetActive(false);
+                continue;
             }
 
             if (child.name.StartsWith("Play"))
             {
                 child.gameObject.SetActive(true);
+                continue;
             }
         }
 
@@ -199,21 +205,35 @@ internal class NightUI : MonoBehaviour
     {
         if (_requiredNight != NightsFlag.None && !DataManager.CompletedNights.HasCompletedNight(_requiredNight) && !_allNightsUnlocked)
         {
-            if (_playButton != null)
+            foreach (Transform child in gameObject.transform)
             {
-                _playButton.enabled = false;
-                var playText = _playButton.GetComponentInChildren<TextMeshProUGUI>();
-                playText?.color = new Color(0.1604f, 0.1604f, 0.1604f);
+                if (child.name.StartsWith("Locked"))
+                {
+                    child.gameObject.SetActive(true);
+                }
+                if (child.name == "Characters")
+                {
+                    child.gameObject.SetActive(false);
+                }
             }
+
+            _playButton?.gameObject.SetActive(false);
         }
         else
         {
-            if (_playButton != null)
+            foreach (Transform child in gameObject.transform)
             {
-                _playButton.enabled = true;
-                var playText = _playButton.GetComponentInChildren<TextMeshProUGUI>();
-                playText?.color = Color.white;
+                if (child.name.StartsWith("Locked"))
+                {
+                    child.gameObject.SetActive(false);
+                }
+                if (child.name == "Characters")
+                {
+                    child.gameObject.SetActive(true);
+                }
             }
+
+            _playButton?.gameObject.SetActive(true);
         }
     }
 
@@ -270,6 +290,17 @@ internal class NightUI : MonoBehaviour
                     nightObj.SetActive(true);
                 });
             }
+        }
+    }
+
+    private string GetUnlockTip()
+    {
+        switch (_nightType)
+        {
+            case NightType.Night:
+                return $"Complete Night {_nightOrChallenge - 1} to unlock.";
+            default:
+                return "Complete Night 6 to unlock.";
         }
     }
 

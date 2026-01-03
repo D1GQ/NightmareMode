@@ -2,6 +2,7 @@
 using NightmareMode.Helpers;
 using NightmareMode.Managers;
 using NightmareMode.Monos;
+using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -13,7 +14,7 @@ internal class MenuScriptPatch
 {
     [HarmonyPatch(nameof(MenuScript.Start))]
     [HarmonyPrefix]
-    private static void Start_Prefix()
+    private static void Start_Prefix(MenuScript __instance)
     {
         NightmarePlugin.Instance.LateLoad();
 
@@ -30,18 +31,16 @@ internal class MenuScriptPatch
             {
                 textTMP.enableWordWrapping = false;
                 textTMP.fontSize = 20f;
+                textTMP.alignment = TextAlignmentOptions.Left;
                 textTMP.SetText(NightmarePlugin.ModEnabled ? "<#B2B2B2>(Vanilla)</color>" : "<#CC0000>(Nightmare)</color>");
             }
-            if (NightmarePlugin.ModEnabled)
-                mode.transform.localPosition = new Vector3(-27f, 31f, 0f);
-            else
-                mode.transform.localPosition = new Vector3(-25.5f, 31f, 0f);
             var button = mode.GetComponent<Button>();
             if (button != null)
             {
                 button.onClick = new();
                 button.onClick.AddListener(NightmarePlugin.SwitchMode);
             }
+            __instance.StartCoroutine(CoSlideModeIn(mode));
         }
 
         if (!NightmarePlugin.ModEnabled) return;
@@ -118,6 +117,27 @@ internal class MenuScriptPatch
         }
 
         NightManager.LoadNightUI();
+    }
+
+    private static IEnumerator CoSlideModeIn(GameObject mode)
+    {
+        Vector3 startPos = new(-25f, 40f, 0f);
+        Vector3 targetPos = new(-25f, 30f, 0f);
+        mode.transform.localPosition = startPos;
+
+        var wait = 5.8f;
+        while (wait > 0f)
+        {
+            wait -= Time.deltaTime;
+            yield return null;
+        }
+
+        while (mode.transform.localPosition != targetPos)
+        {
+            mode.transform.localPosition = Vector3.Lerp(mode.transform.localPosition, targetPos, Time.deltaTime * 2.5f);
+            yield return null;
+        }
+        mode.transform.localPosition = targetPos;
     }
 
     [HarmonyPatch(nameof(MenuScript.Update))]

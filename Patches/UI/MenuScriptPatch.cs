@@ -105,7 +105,7 @@ internal class MenuScriptPatch
         var titleTMP = Utils.FindInactive("Canvas/Text (TMP) (5)")?.GetComponent<TextMeshProUGUI>();
         if (fnafTMP != null && titleTMP != null)
         {
-            fnafTMP.transform.localPosition = new(0f, 270f, 0f);
+            fnafTMP.transform.localPosition = new(0f, 240f, 0f);
             titleTMP.text += "\nNightmare Mode";
         }
 

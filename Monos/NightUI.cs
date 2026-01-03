@@ -82,6 +82,18 @@ internal class NightUI : MonoBehaviour
 
     private void SetupCompletedText()
     {
+        var text = transform.Find("Text (TMP) (1)")?.GetComponent<TextMeshProUGUI>();
+        if (text != null)
+        {
+            _completedText = Instantiate(text, text.transform.parent);
+            _completedText.transform.localPosition = new Vector3(0f, 4f, 0f);
+            _completedText.name = "Completed";
+            _completedText.color = new Color(1f, 1f, 1f, 0.35f);
+            _completedText.fontSize = 20;
+            _completedText.enableWordWrapping = false;
+            _completedText.SetText("");
+        }
+
         var nightNum = transform.Find("Text (TMP) (1)")?.GetComponentInChildren<TextMeshProUGUI>(true);
         if (nightNum != null)
         {
@@ -106,16 +118,6 @@ internal class NightUI : MonoBehaviour
                     _completedText?.SetText("<#00FF20>(Completed)</color>");
                 }
             }
-        }
-
-        var text = transform.Find("Text (TMP) (1)")?.GetComponent<TextMeshProUGUI>();
-        if (text != null)
-        {
-            _completedText = Instantiate(text, text.transform.parent);
-            _completedText.transform.localPosition = new Vector3(0f, 5f, 0f);
-            _completedText.name = "Completed";
-            _completedText.color = new Color(1f, 1f, 1f, 0.35f);
-            _completedText.SetText("");
         }
     }
 

@@ -1,9 +1,9 @@
 ﻿using HarmonyLib;
 
-namespace NightmareMode.Patches.Game;
+namespace NightmareMode.Patches.Bugfixes;
 
 [HarmonyPatch(typeof(LightManagerScript))]
-internal class LightManagerScriptPatch
+internal class LightManagerScriptBugfixPatch
 {
     // Bug fix
     [HarmonyPatch(nameof(LightManagerScript.Update))]

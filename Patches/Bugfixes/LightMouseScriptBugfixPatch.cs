@@ -1,10 +1,10 @@
 ﻿using HarmonyLib;
 using UnityEngine;
 
-namespace NightmareMode.Patches.Game;
+namespace NightmareMode.Patches.Bugfixes;
 
 [HarmonyPatch(typeof(LightMouseScript))]
-internal class LightMouseScriptPatch
+internal class LightMouseScriptBugfixPatch
 {
     // Bug fix
     [HarmonyPatch(nameof(LightMouseScript.Update))]

@@ -81,10 +81,7 @@ internal class ClockScriptPatch
         var promoFilter = Utils.FindInactive("Alive/PromoRender (2)");
         promoFilter?.SetActive(true);
         var audio = promoFilter?.transform.Find("Camera (1)")?.GetComponent<AudioListener>();
-        if (audio != null)
-        {
-            audio.enabled = false;
-        }
+        audio?.enabled = false;
 
         return false;
     }

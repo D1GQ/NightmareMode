@@ -1,4 +1,5 @@
 ﻿using HarmonyLib;
+using NightmareMode.Managers;
 
 namespace NightmareMode.Patches.Game.AI.ShadowBonnie;
 
@@ -12,6 +13,11 @@ internal class ShadowBonnieMainScriptPatch
     {
         if (NightmarePlugin.ModEnabled)
         {
+            if (NightManager.CurrentNight?.Night == 6)
+            {
+                return true;
+            }
+
             return false;
         }
 

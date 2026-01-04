@@ -19,6 +19,7 @@ internal static class NightManager
     internal static IChallenge? CurrentChallenge;
     internal static bool IsChallengeNight;
     internal static int CurrentChallengeId;
+    internal static bool InPowerSurge;
 
     internal static void LoadNightUI()
     {
@@ -87,6 +88,7 @@ internal static class NightManager
         CurrentChallenge = null;
         IsChallengeNight = false;
         CurrentChallengeId = -1;
+        InPowerSurge = false;
         if (BrainScript.night >= 7)
         {
             BrainScript.night = PlayerPrefs.GetInt("night", 1);
@@ -110,6 +112,7 @@ internal static class NightManager
 
     internal static void PowerSurge()
     {
+        InPowerSurge = true;
         var lightss = Utils.FindInactive("Alive/GAMPLAYCOMPONENTS/WinLights");
         var winLights = UnityEngine.Object.Instantiate(lightss, lightss?.transform.parent);
         winLights?.transform.Find("Global Volume").gameObject.SetActive(false);
@@ -152,6 +155,7 @@ internal static class NightManager
 
     internal static void PowerSurgeOut(float delay = 4f)
     {
+        InPowerSurge = true;
         var power = Utils.FindInactive("Alive/GAMPLAYCOMPONENTS/Power");
         var powerOut = UnityEngine.Object.Instantiate(power, power?.transform.parent);
         powerOut?.SetActive(true);
@@ -165,6 +169,8 @@ internal static class NightManager
                 var probe = ReflectionProbe.GetComponent<ReflectionProbe>();
                 probe?.RenderProbe();
             }
+
+            InPowerSurge = false;
         }, delay);
     }
 }

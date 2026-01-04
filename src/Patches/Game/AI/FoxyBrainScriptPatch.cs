@@ -15,4 +15,26 @@ internal class FoxyBrainScriptPatch
         if (!NightmarePlugin.ModEnabled) return true;
         return false;
     }
+
+    [HarmonyPatch(nameof(FoxyBrainScript.Update))]
+    [HarmonyPrefix]
+    private static bool Update_Prefix(FoxyBrainScript __instance)
+    {
+        if (!NightmarePlugin.ModEnabled) return true;
+
+        if (NightManager.InPowerSurge)
+        {
+            if (__instance.StartTimer <= 0f && !__instance.Active)
+            {
+                return false;
+            }
+
+            if (__instance.flash9 && __instance.Active)
+            {
+                return false;
+            }
+        }
+
+        return true;
+    }
 }

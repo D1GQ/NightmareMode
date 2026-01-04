@@ -159,6 +159,12 @@ internal static class NightManager
         DelayedNightAction(() =>
         {
             UnityEngine.Object.Destroy(powerOut);
+            var ReflectionProbe = GameObject.Find("Reflection Probe");
+            if (ReflectionProbe != null)
+            {
+                var probe = ReflectionProbe.GetComponent<ReflectionProbe>();
+                probe?.RenderProbe();
+            }
         }, delay);
     }
 }

@@ -1,5 +1,7 @@
 ﻿using HarmonyLib;
+using NightmareMode.Helpers;
 using NightmareMode.Monos;
+using UnityEngine;
 
 namespace NightmareMode.Patches.Game.AI;
 
@@ -16,5 +18,21 @@ internal class VentCharacterPatch
         }
 
         return true;
+    }
+
+    [HarmonyPatch(nameof(VentCharacter.Update))]
+    [HarmonyPostfix]
+    private static void Update_Postfix(VentCharacter __instance)
+    {
+        if (NightmarePlugin.ModEnabled)
+        {
+            if (__instance.active)
+            {
+                if (Utils.InCameras())
+                {
+                    __instance.entertimer -= Time.deltaTime * 4f;
+                }
+            }
+        }
     }
 }

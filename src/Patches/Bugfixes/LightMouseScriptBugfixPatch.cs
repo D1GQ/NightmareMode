@@ -1,5 +1,5 @@
 ﻿using HarmonyLib;
-using UnityEngine;
+using NightmareMode.Helpers;
 
 namespace NightmareMode.Patches.Bugfixes;
 
@@ -13,7 +13,7 @@ internal class LightMouseScriptBugfixPatch
     {
         if (!NightmarePlugin.ModEnabled) return true;
 
-        if (OfficeLightScript.mask || GameObject.Find("Alive/GAMPLAYCOMPONENTS/Cameras")?.activeInHierarchy == true)
+        if (OfficeLightScript.mask || Utils.InCameras())
         {
             if (__instance.on)
             {

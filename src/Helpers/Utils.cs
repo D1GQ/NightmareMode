@@ -178,6 +178,26 @@ internal static class Utils
         return parent.gameObject;
     }
 
+    private static GameObject? _cameras;
+    private static GameObject Cameras
+    {
+        get
+        {
+            if (_cameras == null)
+            {
+                _cameras = GameObject.Find("Alive/GAMPLAYCOMPONENTS/Cameras");
+            }
+
+            return _cameras;
+        }
+    }
+
+    internal static bool InCameras()
+    {
+        var cameras = Cameras;
+        return cameras != null && cameras.activeInHierarchy;
+    }
+
     internal static void SetCallNote(string note)
     {
         var noteTMP = CatchedSingleton<PauseScript>.Instance?.page2.transform.Find("CallNote")?.GetComponent<TextMeshPro>();

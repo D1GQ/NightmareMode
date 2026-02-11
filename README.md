@@ -26,7 +26,7 @@ No complicated setup—just extract, drop, and play.
 
 ## 📥 Installation
 
-1. **Download** the latest release from the [Releases page](https://github.com/D1GQ/NightmareMode/releases)
+1. **Download** the latest release from the [Releases page](https://github.com/D1GQ/NightmareMode/releases) or [GameBanana page](https://gamebanana.com/mods/596040)
 2. **Extract** the entire ZIP file.
 3. **Drag and drop** all extracted files into your FNAF Rewritten 87 game folder.
 4. **Launch** the game and activate Nightmare Mode from the main menu.

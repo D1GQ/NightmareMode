@@ -232,16 +232,16 @@ internal static class Utils
     {
         return type switch
         {
-            AITypes.FreddyAI => "Toy Freddy",
-            AITypes.BonnieAI => "Toy Bonnie",
-            AITypes.ChicaAI => "Toy Chica",
-            AITypes.MangleAI => "Mangle",
-            AITypes.BBAI => "Balloon Boy",
-            AITypes.PuppetAI => "Puppet",
-            AITypes.WFreddyAI => "Withered Freddy",
-            AITypes.WBonnieAI => "Withered Bonnie",
-            AITypes.WChicaAI => "Withered Chica",
-            AITypes.FOXYAI => "Withered Foxy",
+            AITypes.FreddyAI => Translator.Get("Character.ToyFreddy"),
+            AITypes.BonnieAI => Translator.Get("Character.ToyBonnie"),
+            AITypes.ChicaAI => Translator.Get("Character.ToyChica"),
+            AITypes.MangleAI => Translator.Get("Character.Mangle"),
+            AITypes.BBAI => Translator.Get("Character.BalloonBoy"),
+            AITypes.PuppetAI => Translator.Get("Character.Puppet"),
+            AITypes.WFreddyAI => Translator.Get("Character.Freddy"),
+            AITypes.WBonnieAI => Translator.Get("Character.Bonnie"),
+            AITypes.WChicaAI => Translator.Get("Character.Chica"),
+            AITypes.FOXYAI => Translator.Get("Character.Foxy"),
             _ => "???",
         };
     }

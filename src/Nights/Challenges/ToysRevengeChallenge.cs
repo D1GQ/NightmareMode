@@ -18,7 +18,7 @@ internal class ToysRevengeChallenge : IChallenge
     private string note = "";
     public void InitChallenge()
     {
-        Utils.SetCallNote("The toys and only the toys are really aggressive tonight!");
+        Utils.SetCallNote(Translator.Get("Note.ToysRevenge"));
     }
 
     public int Hours => 6;

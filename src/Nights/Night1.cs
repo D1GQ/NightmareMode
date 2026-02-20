@@ -2,6 +2,7 @@
 using NightmareMode.Items.Attributes;
 using NightmareMode.Items.Interfaces;
 using NightmareMode.Managers;
+using NightmareMode.Modules;
 
 namespace NightmareMode.Nights;
 
@@ -45,9 +46,9 @@ internal class Night1 : INight
 
     private void At_12AM()
     {
-        note += "I need to make sure that I keep the music box wound up! ";
+        note += Translator.Get("Note.Night1.Part1") + " ";
         Utils.SetCallNote(note);
-        note += "Mangle seems to be more aggressive than usual... ";
+        note += Translator.Get("Note.Night1.Part2") + " ";
         Utils.SetCallNoteDelay(note, 30f);
 
         Utils.SetStartTimeAll(2.5f);
@@ -78,7 +79,7 @@ internal class Night1 : INight
 
     private void At_2AM()
     {
-        note += "Toy Bonnie and Toy Chica are trying to gang up on me. Maybe I can time putting on my mask with Mangle to knock all three out at once. ";
+        note += Translator.Get("Note.Night1.Part3") + " ";
         Utils.SetCallNote(note);
 
         AIManager.MangleAI?.SetDifficulty(5);
@@ -87,7 +88,7 @@ internal class Night1 : INight
 
     private void At_3AM()
     {
-        note += "Toy Freddy likes to turn off the breakers, I need to listen out for his laughs. ";
+        note += Translator.Get("Note.Night1.Part4") + " ";
         Utils.SetCallNote(note);
 
         AIManager.Toy_BonnieAI?.SetDifficulty(3);
@@ -101,7 +102,7 @@ internal class Night1 : INight
 
     private void At_4AM()
     {
-        note += "Mangle takes the longest to trick with the mask—perhaps I can use that to my advantage. ";
+        note += Translator.Get("Note.Night1.Part5");
         Utils.SetCallNote(note);
 
         AIManager.MangleAI?.SetDifficulty(12);

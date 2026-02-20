@@ -15,6 +15,23 @@
   "Challenge.ChaosShuffle.Title": "Chaos Shuffle",
   "Challenge.Overtime.Title": "Overtime",
 
+  "Note.Summary": "Summary... Watch the music box, Mangle’s aggression, Toy duo’s teamwork, and mask timing. Toy Freddy, Foxy and Balloon Boy are threats, and old Freddy and Mangle are slow to leave!",
+
+  "Note.Night1.Part1": "I need to make sure that I keep the music box wound up!",
+  "Note.Night1.Part2": "Mangle seems to be more aggressive than usual...",
+  "Note.Night1.Part3": "Toy Bonnie and Toy Chica are trying to gang up on me. Maybe I can time putting on my mask with Mangle to knock all three out at once.",
+  "Note.Night1.Part4": "Toy Freddy likes to turn off the breakers, I need to listen out for his laughs.",
+  "Note.Night1.Part5": "Mangle takes the longest to trick with the mask—perhaps I can use that to my advantage.",
+
+  "Note.Night2.Part1": "I need to keep an eye on Foxy in the hallway tonight!",
+  "Note.Night2.Part2": "Balloon Boy isn’t an old friend I’d ever want to meet again. I’ll need to watch both him and Foxy!",
+  "Note.Night2.Part3": "The older Freddy takes forever to leave the office, almost worse than Mangle... I think.",
+
+  "Note.ToysRevenge": "The toys and only the toys are really aggressive tonight!",
+  "Note.PowerOutage": "It's pretty stormy tonight, I expect to see some power surges...",
+  "Note.ChaosShuffle": "The Animatronics seem a bit quirky tonight... Every hour when the lights flicker all Animatronic levels shift to a random number!",
+  "Note.Overtime": "My manager asked me to work extra hours tonight, I guess my shift will last until 9AM...",
+
   "Character.ToyFreddy": "Toy Freddy",
   "Character.ToyBonnie": "Toy Bonnie",
   "Character.ToyChica": "Toy Chica",

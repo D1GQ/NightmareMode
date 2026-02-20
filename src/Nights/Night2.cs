@@ -2,6 +2,7 @@
 using NightmareMode.Items.Attributes;
 using NightmareMode.Items.Interfaces;
 using NightmareMode.Managers;
+using NightmareMode.Modules;
 
 namespace NightmareMode.Nights;
 
@@ -42,7 +43,7 @@ internal class Night2 : INight
 
     private void At_12AM()
     {
-        note += "I need to keep an eye on Foxy in the hallway tonight! ";
+        note += Translator.Get("Note.Night2.Part1") + " ";
         Utils.SetCallNote(note);
 
         Utils.SetStartTimeAllRandom(2.5f, 5f);
@@ -62,7 +63,7 @@ internal class Night2 : INight
 
     private void At_1AM()
     {
-        note += "Balloon Boy isn’t an old friend I’d ever want to meet again. I’ll need to watch both him and Foxy! ";
+        note += Translator.Get("Note.Night2.Part2") + " ";
         Utils.SetCallNote(note);
 
         AIManager.W_BonnieAI?.SetDifficulty(5);
@@ -73,7 +74,7 @@ internal class Night2 : INight
 
     private void At_3AM()
     {
-        note += "The older Freddy takes forever to leave the office—almost worse than Mangle, I think. ";
+        note += Translator.Get("Note.Night2.Part3");
         Utils.SetCallNote(note);
 
         AIManager.W_FreddyAI?.SetDifficulty(10);

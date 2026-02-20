@@ -4,6 +4,7 @@ using NightmareMode.Items.Attributes;
 using NightmareMode.Items.Enums;
 using NightmareMode.Items.Interfaces;
 using NightmareMode.Managers;
+using NightmareMode.Modules;
 
 namespace NightmareMode.Nights.Challenges;
 
@@ -16,7 +17,7 @@ internal class ChaosShuffleChallenge : IChallenge
     private string note = "";
     public void InitChallenge()
     {
-        Utils.SetCallNote("The Animatronics seem a bit quirky tonight... Every hour when the lights flicker all Animatronic levels shift to a random number!");
+        Utils.SetCallNote(Translator.Get("Note.ChaosShuffle"));
     }
 
     public int Hours => 6;

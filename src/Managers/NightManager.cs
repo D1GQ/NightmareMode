@@ -12,7 +12,7 @@ namespace NightmareMode.Managers;
 
 internal static class NightManager
 {
-    internal static readonly string SummaryNote = "Summary... Watch the music box, Mangle’s aggression, Toy duo’s teamwork, and mask timing. Toy Freddy, Foxy and Balloon Boy are threats, and old Freddy and Mangle are slow to leave! ";
+    internal static string SummaryNote => Translator.Get("Note.Summary") + " ";
 
     internal static ITimeEvent? Current => !IsChallengeNight ? CurrentNight : CurrentChallenge;
     internal static INight? CurrentNight;

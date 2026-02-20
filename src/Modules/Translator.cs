@@ -78,20 +78,70 @@ internal static class Translator
 
         if (jsonContent.StartsWith("{") && jsonContent.EndsWith("}"))
         {
-            jsonContent = jsonContent.Substring(1, jsonContent.Length - 2);
+            jsonContent = jsonContent.Substring(1, jsonContent.Length - 2).Trim();
         }
 
-        string[] pairs = jsonContent.Split(',');
+        bool inString = false;
+        bool escapeNext = false;
+        string currentKey = "";
+        string currentValue = "";
+        string currentToken = "";
+        bool parsingKey = true;
 
-        foreach (string pair in pairs)
+        for (int i = 0; i < jsonContent.Length; i++)
         {
-            string[] keyValue = pair.Split(':');
-            if (keyValue.Length == 2)
+            char c = jsonContent[i];
+
+            if (escapeNext)
             {
-                string key = keyValue[0].Trim().Trim('"');
-                string value = keyValue[1].Trim().Trim('"');
-                keyValuePairs[key] = value;
+                currentToken += c;
+                escapeNext = false;
+                continue;
             }
+
+            if (c == '\\')
+            {
+                escapeNext = true;
+                continue;
+            }
+
+            if (c == '"')
+            {
+                inString = !inString;
+                continue;
+            }
+
+            if (!inString)
+            {
+                if (c == ':' && parsingKey)
+                {
+                    currentKey = currentToken.Trim().Trim('"');
+                    currentToken = "";
+                    parsingKey = false;
+                    continue;
+                }
+
+                if (c == ',')
+                {
+                    currentValue = currentToken.Trim().Trim('"');
+                    if (!string.IsNullOrEmpty(currentKey))
+                    {
+                        keyValuePairs[currentKey] = currentValue;
+                    }
+                    currentToken = "";
+                    parsingKey = true;
+                    continue;
+                }
+            }
+
+            currentToken += c;
+        }
+
+        // Handle last pair
+        if (!parsingKey && !string.IsNullOrEmpty(currentKey))
+        {
+            currentValue = currentToken.Trim().Trim('"');
+            keyValuePairs[currentKey] = currentValue;
         }
     }
 

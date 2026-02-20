@@ -4,6 +4,7 @@ using NightmareMode.Items.Attributes;
 using NightmareMode.Items.Enums;
 using NightmareMode.Items.Interfaces;
 using NightmareMode.Managers;
+using NightmareMode.Modules;
 using UnityEngine;
 
 namespace NightmareMode.Nights.Challenges;
@@ -17,7 +18,7 @@ internal class OvertimeChallenge : IChallenge
     private string note = "";
     public void InitChallenge()
     {
-        Utils.SetCallNote("My manager asked me to work extra hours tonight, I guess my shift will last until 9AM...\n\n" + NightManager.SummaryNote);
+        Utils.SetCallNote(Translator.Get("Note.Overtime") + "\n\n" + NightManager.SummaryNote);
 
         _aiMultiplier = 0;
         _shifts = new bool[4];

@@ -4,6 +4,7 @@ using NightmareMode.Items.Attributes;
 using NightmareMode.Items.Enums;
 using NightmareMode.Items.Interfaces;
 using NightmareMode.Managers;
+using NightmareMode.Modules;
 
 namespace NightmareMode.Nights.Challenges;
 
@@ -16,7 +17,7 @@ internal class PowerOutageChallenge : IChallenge
     private string note = "";
     public void InitChallenge()
     {
-        Utils.SetCallNote("It's pretty stormy tonight, I expect to see some power surges...");
+        Utils.SetCallNote(Translator.Get("Note.PowerOutage"));
     }
 
     public int Hours => 6;

@@ -199,7 +199,7 @@ internal sealed class NightUI : MonoBehaviour
 
         if (_nightType == NightType.CustomNight)
         {
-            _playButton?.transform.localPosition = new Vector3(0f, -15f, 0f);
+            _playButton?.transform.localPosition = new Vector3(0f, -16.5f, 0f);
 
             var rawImage1 = transform.Find("RawImage");
             var rawImage2 = transform.Find("RawImage (1)");
@@ -308,9 +308,9 @@ internal sealed class NightUI : MonoBehaviour
         switch (_nightType)
         {
             case NightType.Night:
-                return $"Complete Night {_nightOrChallenge - 1} to unlock.";
+                return Translator.Get("Night.UnlockTip", $"{_nightOrChallenge - 1}");
             default:
-                return "Complete Night 6 to unlock.";
+                return Translator.Get("Night.UnlockTip", "6");
         }
     }
 

@@ -78,6 +78,7 @@ internal sealed class GUIAutoTranslator : MonoBehaviour
             "Settings" => "Text.Settings",
             "ENTER PICTURE CODE" => "Text.Enter_Picture_Code",
             "Activate Code" => "Text.Activate_Code",
+            "LOCKED!" => "Text.Locked",
             // Graphics Settings menu
             "Graphics Settings" => "Text.Graphics_Settings",
             "Low" => "Text.Graphics_Low",

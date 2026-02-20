@@ -8,6 +8,7 @@
   "Text.Settings": "Settings",
   "Text.Enter_Picture_Code": "ENTER PICTURE CODE",
   "Text.Activate_Code": "Activate Code",
+  "Text.Locked": "LOCKED!",
 
   "Text.Graphics_Settings": "Graphics Settings",
   "Text.Graphics_Low": "Low",
@@ -48,6 +49,7 @@
   "Night": "Night",
   "Night.Completed": "Completed",
   "Night.Challenge": "Challenge Night",
+  "Night.UnlockTip": "Complete Night {0} to unlock.",
   "Night1.Title": "Toy Freddy",
   "Night2.Title": "Old Friends",
   "Night3.Title": "Reunited",

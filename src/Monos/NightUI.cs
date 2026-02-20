@@ -110,23 +110,23 @@ internal sealed class NightUI : MonoBehaviour
         {
             if (_nightType != NightType.Challenge)
             {
-                nightNum.SetText($"(Night {_nightOrChallenge})");
+                nightNum.SetText($"({Translator.Get("Night")} {_nightOrChallenge})");
                 nightNum.enableWordWrapping = false;
 
                 var inight = RegisterNightAttribute.GetClassInstance(c => c.Night == _nightOrChallenge);
                 if (inight != null && DataManager.CompletedNights.HasCompletedNight(inight.Night.ToNightFlag()))
                 {
-                    _completedText?.SetText("<#00FF20>(Completed)</color>");
+                    _completedText?.SetText($"<#00FF20>({Translator.Get("Night.Completed")})</color>");
                 }
             }
             else
             {
                 nightNum.enableWordWrapping = false;
-                nightNum.SetText($"(Challenge Night)");
+                nightNum.SetText(Translator.Get("Night.Challenge"));
 
                 if (RegisterChallengeAttribute.GetClassInstance(c => c.ChallengeId == _nightOrChallenge)?.Completed == true)
                 {
-                    _completedText?.SetText("<#00FF20>(Completed)</color>");
+                    _completedText?.SetText($"<#00FF20>({Translator.Get("Night.Completed")})</color>");
                 }
             }
         }

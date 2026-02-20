@@ -21,6 +21,7 @@ internal sealed class GUIAutoTranslator : MonoBehaviour
         {
             textMeshProUGUI.SetText(text);
         };
+        textMeshProUGUI.font = GetFont(textMeshProUGUI.font);
 
         UpdateText();
     }
@@ -36,6 +37,7 @@ internal sealed class GUIAutoTranslator : MonoBehaviour
         {
             textMeshPro.SetText(text);
         };
+        textMeshPro.font = GetFont(textMeshPro.font);
 
         UpdateText();
     }
@@ -47,6 +49,21 @@ internal sealed class GUIAutoTranslator : MonoBehaviour
 
         string translation = Translator.Get(key);
         setText?.Invoke(translation);
+    }
+
+    private TMP_FontAsset GetFont(TMP_FontAsset defaultFont)
+    {
+        return Application.systemLanguage switch
+        {
+            SystemLanguage.Korean => GetFontByName("NanumBrushScript-Regular SDF"),
+            _ => defaultFont,
+        };
+    }
+
+    private TMP_FontAsset GetFontByName(string fontName)
+    {
+        return Resources.FindObjectsOfTypeAll<TMP_FontAsset>()
+            .FirstOrDefault(f => f.name == fontName);
     }
 
     private string GetKey()

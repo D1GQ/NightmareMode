@@ -31,10 +31,10 @@ internal static class NightManager
         {
             night6.SetActive(false);
             night6.name = "NightPrefab";
-            NightUI.NightPrefab = night6;
+            NightUI.SetNightPrefab(night6);
         }
 
-        NightUI._allNights.Clear();
+        NightUI.Reset();
         NightUI.Create("Toy Playtime", 1, NightsFlag.None, NightType.Night, GetOriginalNightThumbnail(1));
         NightUI.Create("Old Friends", 2, NightsFlag.Night_1, NightType.Night, GetOriginalNightThumbnail(2));
         NightUI.Create("Reunited", 3, NightsFlag.Night_2, NightType.Night, GetOriginalNightThumbnail(3));

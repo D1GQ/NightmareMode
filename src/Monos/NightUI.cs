@@ -13,9 +13,8 @@ namespace NightmareMode.Monos;
 
 internal class NightUI : MonoBehaviour
 {
-    internal static GameObject? NightPrefab;
-
-    internal static readonly List<NightUI> _allNights = [];
+    private static GameObject? _nightPrefab;
+    private static readonly List<NightUI> _allNights = [];
     private static bool _allNightsUnlocked = false;
 
     private int _nightOrChallenge;
@@ -29,10 +28,20 @@ internal class NightUI : MonoBehaviour
     private RawImage? _rawImage;
     private GameObject? _customNightContainer;
 
+    internal static void Reset()
+    {
+        _allNights.Clear();
+    }
+
+    internal static void SetNightPrefab(GameObject nightPrefab)
+    {
+        _nightPrefab = nightPrefab;
+    }
+
     internal static NightUI? Create(string title, int nightOrChallenge, NightsFlag requiredNight, NightType nightType, Sprite? sprite = null)
     {
-        if (NightPrefab == null) return null;
-        var nightObj = Instantiate(NightPrefab, NightPrefab.transform.parent);
+        if (_nightPrefab == null) return null;
+        var nightObj = Instantiate(_nightPrefab, _nightPrefab.transform.parent);
         Destroy(nightObj.GetComponent<NightLock>());
 
         nightObj.name = nightType != NightType.Challenge ? $"Night{nightOrChallenge}" : $"ChallengeNight({title})";

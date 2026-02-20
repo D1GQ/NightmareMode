@@ -28,8 +28,4 @@
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
 	</ItemGroup>
-
-	<Target Name="PostBuild" AfterTargets="PostBuildEvent">
-		<Exec Command="copy &quot;$(TargetDir)NightmareMode.dll&quot; &quot;C:\Users\yourb\OneDrive\Documents\My Files\File Programs\Games\FNAF Rewritten 87\Mods\NightmareMode V2 - Mod\BepInEx\plugins&quot;" />
-	</Target>
 </Project>

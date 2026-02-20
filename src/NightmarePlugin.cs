@@ -35,6 +35,7 @@ internal class NightmarePlugin : BaseUnityPlugin
 
         Application.runInBackground = true;
         SceneManager.activeSceneChanged += OnSceneChanged;
+        Translator.Initialize();
         DataManager.LoadSettings();
         InstanceAttribute.RegisterAll();
     }

@@ -11,7 +11,7 @@ using UnityEngine.UI;
 
 namespace NightmareMode.Monos;
 
-internal class NightUI : MonoBehaviour
+internal sealed class NightUI : MonoBehaviour
 {
     private static GameObject? _nightPrefab;
     private static readonly List<NightUI> _allNights = [];

@@ -9,7 +9,7 @@ internal class PlayerPrefsPatch
 {
     [HarmonyPatch(nameof(PlayerPrefs.SetInt))]
     [HarmonyPrefix]
-    private static bool SetInt(string key, int value)
+    private static bool SetInt_Prefix(string key, int value)
     {
         if (!NightmarePlugin.ModEnabled) return true;
 
@@ -19,7 +19,7 @@ internal class PlayerPrefsPatch
 
     [HarmonyPatch(nameof(PlayerPrefs.SetFloat))]
     [HarmonyPrefix]
-    private static bool SetFloat(string key, float value)
+    private static bool SetFloat_Prefix(string key, float value)
     {
         if (!NightmarePlugin.ModEnabled) return true;
 
@@ -29,7 +29,7 @@ internal class PlayerPrefsPatch
 
     [HarmonyPatch(nameof(PlayerPrefs.SetString))]
     [HarmonyPrefix]
-    private static bool SetString(string key, string value)
+    private static bool SetString_Prefix(string key, string value)
     {
         if (!NightmarePlugin.ModEnabled) return true;
 
@@ -37,9 +37,9 @@ internal class PlayerPrefsPatch
         return false;
     }
 
-    [HarmonyPatch(nameof(PlayerPrefs.GetInt), (new[] { typeof(string), typeof(int) }))]
+    [HarmonyPatch(nameof(PlayerPrefs.GetInt), [typeof(string), typeof(int)])]
     [HarmonyPrefix]
-    private static bool GetInt(string key, ref int defaultValue, ref int __result)
+    private static bool GetInt_Prefix(string key, ref int defaultValue, ref int __result)
     {
         if (!NightmarePlugin.ModEnabled) return true;
 
@@ -48,9 +48,9 @@ internal class PlayerPrefsPatch
         return false;
     }
 
-    [HarmonyPatch(nameof(PlayerPrefs.GetFloat), (new[] { typeof(string), typeof(float) }))]
+    [HarmonyPatch(nameof(PlayerPrefs.GetFloat), [typeof(string), typeof(float)])]
     [HarmonyPrefix]
-    private static bool GetFloat(string key, ref float defaultValue, ref float __result)
+    private static bool GetFloat_Prefix(string key, ref float defaultValue, ref float __result)
     {
         if (!NightmarePlugin.ModEnabled) return true;
 
@@ -59,9 +59,9 @@ internal class PlayerPrefsPatch
         return false;
     }
 
-    [HarmonyPatch(nameof(PlayerPrefs.GetString), (new[] { typeof(string), typeof(string) }))]
+    [HarmonyPatch(nameof(PlayerPrefs.GetString), [typeof(string), typeof(string)])]
     [HarmonyPrefix]
-    private static bool GetString(string key, ref string defaultValue, ref string __result)
+    private static bool GetString_Prefix(string key, ref string defaultValue, ref string __result)
     {
         if (!NightmarePlugin.ModEnabled) return true;
 
@@ -71,7 +71,7 @@ internal class PlayerPrefsPatch
 
     [HarmonyPatch(nameof(PlayerPrefs.HasKey))]
     [HarmonyPrefix]
-    private static bool HasKey(string key, ref bool __result)
+    private static bool HasKey_Prefix(string key, ref bool __result)
     {
         if (!NightmarePlugin.ModEnabled) return true;
 
@@ -81,7 +81,7 @@ internal class PlayerPrefsPatch
 
     [HarmonyPatch(nameof(PlayerPrefs.DeleteKey))]
     [HarmonyPrefix]
-    private static bool DeleteKey(string key)
+    private static bool DeleteKey_Prefix(string key)
     {
         if (!NightmarePlugin.ModEnabled) return true;
 
@@ -91,7 +91,7 @@ internal class PlayerPrefsPatch
 
     [HarmonyPatch(nameof(PlayerPrefs.DeleteAll))]
     [HarmonyPrefix]
-    private static bool DeleteAll()
+    private static bool DeleteAll_Prefix()
     {
         if (!NightmarePlugin.ModEnabled) return true;
 
@@ -101,7 +101,7 @@ internal class PlayerPrefsPatch
 
     [HarmonyPatch(nameof(PlayerPrefs.Save))]
     [HarmonyPrefix]
-    private static bool Save()
+    private static bool Save_Prefix()
     {
         if (!NightmarePlugin.ModEnabled) return true;
 

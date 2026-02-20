@@ -8,7 +8,7 @@ using UnityEngine.UI;
 
 namespace NightmareMode.Monos;
 
-internal class CustomNightAIUI : MonoBehaviour
+internal sealed class CustomNightAIUI : MonoBehaviour
 {
     private bool hasSet;
     private AITypes AI;

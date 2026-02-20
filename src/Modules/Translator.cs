@@ -94,12 +94,20 @@ internal static class Translator
 
             if (escapeNext)
             {
-                currentToken += c;
+                currentToken += c switch
+                {
+                    'n' => '\n',
+                    't' => '\t',
+                    'r' => '\r',
+                    '\\' => '\\',
+                    '"' => '"',
+                    _ => (object)c,
+                };
                 escapeNext = false;
                 continue;
             }
 
-            if (c == '\\')
+            if (c == '\\' && inString)
             {
                 escapeNext = true;
                 continue;
@@ -132,12 +140,16 @@ internal static class Translator
                     parsingKey = true;
                     continue;
                 }
+
+                if (char.IsWhiteSpace(c))
+                {
+                    continue;
+                }
             }
 
             currentToken += c;
         }
 
-        // Handle last pair
         if (!parsingKey && !string.IsNullOrEmpty(currentKey))
         {
             currentValue = currentToken.Trim().Trim('"');

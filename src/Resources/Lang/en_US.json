@@ -1,4 +1,47 @@
 {
+  "Text.Title": "Five Nights At Freddy's",
+  "Text.SubTitle": "REWRITTEN",
+  "Text.SubTitleMod": "REWRITTEN\nNightmare Mode",
+
+  "Text.Play": "PLAY",
+  "Text.Quit": "QUIT",
+  "Text.Settings": "Settings",
+  "Text.Enter_Picture_Code": "ENTER PICTURE CODE",
+  "Text.Activate_Code": "Activate Code",
+
+  "Text.Graphics_Settings": "Graphics Settings",
+  "Text.Graphics_Low": "Low",
+  "Text.Graphics_Medium": "Medium",
+  "Text.Graphics_High": "High",
+  "Text.Graphics_Ultra": "Ultra",
+
+  "Text.Audio": "Audio",
+  "Text.Master_Volume": "MASTER VOLUME",
+  "Text.SFX_Volume": "SFX VOLUME",
+  "Text.Ambience_Volume": "AMBIENCE VOLUME",
+  "Text.Jumpscare_Volume": "JUMPSCARE VOLUME",
+  "Text.Minigame_Volume": "MINIGAME VOLUME",
+  "Text.Phoneguy_Volume": "PHONE GUY VOLUME",
+  "Text.Close": "CLOSE",
+
+  "Text.Enter": "ENTER",
+  "Text.Return": "RETURN",
+  "Text.Loading": "LOADING...",
+  "Text.Loading.Tip1": "If something kills you, the game will give you a tip on how to avoid it happening again",
+  "Text.Loading.Tip2": "Balloon Boy will not react to the empty Freddy head, watch how he reacts to your flashlight instead",
+  "Text.Loading.Tip3": "The Mangle will leave your office after lowering its head twice",
+  "Text.Loading.Tip4": "Gen 2 Freddy will laugh if he is about to mess with a breaker box",
+  "Text.Loading.Tip5": "You cannot spam the camera flashlight, stop trying...",
+
+  "Text.Notes": "Notes:",
+  "Text.Week1": "WEEK 1",
+  "Text.Monday": "MONDAY",
+  "Text.Tuesday": "TUESDAY",
+  "Text.Wednesday": "WEDNESDAY",
+  "Text.Thursday": "THURSDAY",
+  "Text.Friday": "FRIDAY",
+  "Text.Saturday": "SATURDAY",
+
   "Mode.Vanilla": "Vanilla",
   "Mode.Nightmare": "Nightmare",
 

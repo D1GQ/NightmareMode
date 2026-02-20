@@ -2,7 +2,7 @@
 
 namespace NightmareMode.Monos;
 
-internal class AudioSourceGlitch : MonoBehaviour
+internal sealed class AudioSourceGlitch : MonoBehaviour
 {
     private AudioSource? audioSource;
     private float baseVolume;

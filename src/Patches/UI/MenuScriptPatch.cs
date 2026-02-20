@@ -99,7 +99,7 @@ internal class MenuScriptPatch
         if (fnafTMP != null && titleTMP != null)
         {
             fnafTMP.transform.localPosition = new(0f, 240f, 0f);
-            titleTMP.text += "\nNightmare Mode";
+            // GUIAutoTranslator will add Nightmare Mode
         }
 
         NightManager.LoadNightUI();

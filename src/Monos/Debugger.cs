@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 
 namespace NightmareMode.Monos;
 
-internal class Debugger : MonoSingleton<Debugger>
+internal sealed class Debugger : MonoSingleton<Debugger>
 {
     private bool _showNightInfo;
     internal bool _godMode;

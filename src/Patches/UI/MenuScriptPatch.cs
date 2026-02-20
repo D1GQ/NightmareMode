@@ -1,6 +1,7 @@
 ﻿using HarmonyLib;
 using NightmareMode.Helpers;
 using NightmareMode.Managers;
+using NightmareMode.Modules;
 using System.Collections;
 using TMPro;
 using UnityEngine;
@@ -31,7 +32,7 @@ internal class MenuScriptPatch
                 textTMP.enableWordWrapping = false;
                 textTMP.fontSize = 20f;
                 textTMP.alignment = TextAlignmentOptions.Left;
-                textTMP.SetText(NightmarePlugin.ModEnabled ? "<#B2B2B2>(Vanilla)</color>" : "<#CC0000>(Nightmare)</color>");
+                textTMP.SetText(NightmarePlugin.ModEnabled ? $"<#B2B2B2>({Translator.Get("Mode.Vanilla")})</color>" : $"<#CC0000>({Translator.Get("Mode.Nightmare")})</color>");
             }
             var button = mode.GetComponent<Button>();
             if (button != null)

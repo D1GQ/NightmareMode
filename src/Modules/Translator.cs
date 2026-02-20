@@ -27,7 +27,6 @@ internal static class Translator
                 {
                     languageType = language,
                     keyValuePairs = keyValuePairs,
-                    keysTranslated = [.. keyValuePairs.Keys]
                 };
                 _translations[language] = languageData;
                 NightmarePlugin.Log.LogInfo($"Loaded translations for {language} ({fileName})");

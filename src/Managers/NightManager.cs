@@ -35,18 +35,18 @@ internal static class NightManager
         }
 
         NightUI.Reset();
-        NightUI.Create("Toy Playtime", 1, NightsFlag.None, NightType.Night, GetOriginalNightThumbnail(1));
-        NightUI.Create("Old Friends", 2, NightsFlag.Night_1, NightType.Night, GetOriginalNightThumbnail(2));
-        NightUI.Create("Reunited", 3, NightsFlag.Night_2, NightType.Night, GetOriginalNightThumbnail(3));
-        NightUI.Create("Break In", 4, NightsFlag.Night_3, NightType.Night, GetOriginalNightThumbnail(4));
-        NightUI.Create("Happiest Day", 5, NightsFlag.Night_4, NightType.Night, GetOriginalNightThumbnail(5));
-        NightUI.Create("The Forgotten", 6, NightsFlag.Night_5, NightType.Night, Utils.LoadSprite("NightmareMode.Resources.Images.night6.png", 100f));
+        NightUI.Create(Translator.Get("Night1.Title"), 1, NightsFlag.None, NightType.Night, GetOriginalNightThumbnail(1));
+        NightUI.Create(Translator.Get("Night2.Title"), 2, NightsFlag.Night_1, NightType.Night, GetOriginalNightThumbnail(2));
+        NightUI.Create(Translator.Get("Night3.Title"), 3, NightsFlag.Night_2, NightType.Night, GetOriginalNightThumbnail(3));
+        NightUI.Create(Translator.Get("Night4.Title"), 4, NightsFlag.Night_3, NightType.Night, GetOriginalNightThumbnail(4));
+        NightUI.Create(Translator.Get("Night5.Title"), 5, NightsFlag.Night_4, NightType.Night, GetOriginalNightThumbnail(5));
+        NightUI.Create(Translator.Get("Night6.Title"), 6, NightsFlag.Night_5, NightType.Night, Utils.LoadSprite("NightmareMode.Resources.Images.night6.png", 100f));
 
-        NightUI.Create("Custom Night", 7, NightsFlag.Night_6, NightType.CustomNight);
-        NightUI.Create("Toys Revenge", 1, NightsFlag.Night_6, NightType.Challenge);
-        NightUI.Create("Power Outage", 2, NightsFlag.Night_6, NightType.Challenge);
-        NightUI.Create("Chaos Shuffle", 3, NightsFlag.Night_6, NightType.Challenge);
-        NightUI.Create("Overtime", 4, NightsFlag.Night_6, NightType.Challenge);
+        NightUI.Create(Translator.Get("NightCustom.Title"), 7, NightsFlag.Night_6, NightType.CustomNight);
+        NightUI.Create(Translator.Get("Challenge.ToysRevenge.Title"), 1, NightsFlag.Night_6, NightType.Challenge);
+        NightUI.Create(Translator.Get("Challenge.PowerOutage.Title"), 2, NightsFlag.Night_6, NightType.Challenge);
+        NightUI.Create(Translator.Get("Challenge.ChaosShuffle.Title"), 3, NightsFlag.Night_6, NightType.Challenge);
+        NightUI.Create(Translator.Get("Challenge.Overtime.Title"), 4, NightsFlag.Night_6, NightType.Challenge);
     }
 
     private static Sprite? GetOriginalNightThumbnail(int night)

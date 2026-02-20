@@ -1,3 +1,29 @@
 {
-  "": ""
+  "Mode.Vanilla": "Vanilla",
+  "Mode.Nightmare": "Nightmare",
+
+  "Night1.Title": "Toy Freddy",
+  "Night2.Title": "Old Friends",
+  "Night3.Title": "Reunited",
+  "Night4.Title": "Break In",
+  "Night5.Title": "Happiest Day",
+  "Night6.Title": "The Forgotten",
+  "NightCustom.Title": "Custom Night",
+
+  "Challenge.ToysRevenge.Title": "Toys Revenge",
+  "Challenge.PowerOutage.Title": "Power Outage",
+  "Challenge.ChaosShuffle.Title": "Chaos Shuffle",
+  "Challenge.Overtime.Title": "Overtime",
+
+  "Character.ToyFreddy": "Toy Freddy",
+  "Character.ToyBonnie": "Toy Bonnie",
+  "Character.ToyChica": "Toy Chica",
+  "Character.Mangle": "Mangle",
+  "Character.BalloonBoy": "Balloon Boy",
+  "Character.BB": "BB",
+  "Character.Puppet": "Puppet",
+  "Character.Freddy": "Freddy",
+  "Character.Bonnie": "Bonnie",
+  "Character.Chica": "Chica",
+  "Character.Foxy": "Foxy"
 }

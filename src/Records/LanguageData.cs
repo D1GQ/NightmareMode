@@ -8,6 +8,5 @@ internal record LanguageData
 {
     internal SystemLanguage languageType;
     internal Dictionary<string, string> keyValuePairs = [];
-    internal List<string> keysTranslated = [];
-    internal bool HasTranslation(string key) => keysTranslated.Contains(key);
+    internal bool HasTranslation(string key) => keyValuePairs.ContainsKey(key);
 }

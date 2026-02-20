@@ -1,5 +1,6 @@
 ﻿using NightmareMode.Helpers;
 using NightmareMode.Items.Enums;
+using NightmareMode.Modules;
 using NightmareMode.Monos;
 using TMPro;
 using UnityEngine;
@@ -19,16 +20,16 @@ internal static class CustomNightManager
         {
             int max = NightmarePlugin.CustomNightMaxAILevelAll?.Value ?? 20;
             int maxPuppet = NightmarePlugin.CustomNightMaxAILevelPuppet?.Value ?? 10;
-            CreateCharacter(nightUI, AITypes.FreddyAI, "Toy Freddy", 0, max, LoadPortraitFromSheet((1, 1)));
-            CreateCharacter(nightUI, AITypes.BonnieAI, "Toy Bonnie", 0, max, LoadPortraitFromSheet((2, 1)));
-            CreateCharacter(nightUI, AITypes.ChicaAI, "Toy Chica", 0, max, LoadPortraitFromSheet((3, 1)));
-            CreateCharacter(nightUI, AITypes.MangleAI, "Mangle", 0, max, LoadPortraitFromSheet((4, 1)));
-            CreateCharacter(nightUI, AITypes.BBAI, "BB", 0, max, LoadPortraitFromSheet((5, 1)));
-            CreateCharacter(nightUI, AITypes.PuppetAI, "Puppet", 0, maxPuppet, LoadPortraitFromSheet((1, 2)));
-            CreateCharacter(nightUI, AITypes.WFreddyAI, "Freddy", 0, max, LoadPortraitFromSheet((2, 2)));
-            CreateCharacter(nightUI, AITypes.WBonnieAI, "Bonnie", 0, max, LoadPortraitFromSheet((3, 2)));
-            CreateCharacter(nightUI, AITypes.WChicaAI, "Chica", 0, max, LoadPortraitFromSheet((4, 2)));
-            CreateCharacter(nightUI, AITypes.FOXYAI, "Foxy", 0, max, LoadPortraitFromSheet((5, 2)));
+            CreateCharacter(nightUI, AITypes.FreddyAI, Translator.Get("Character.ToyFreddy"), 0, max, LoadPortraitFromSheet((1, 1)));
+            CreateCharacter(nightUI, AITypes.BonnieAI, Translator.Get("Character.ToyBonnie"), 0, max, LoadPortraitFromSheet((2, 1)));
+            CreateCharacter(nightUI, AITypes.ChicaAI, Translator.Get("Character.ToyChica"), 0, max, LoadPortraitFromSheet((3, 1)));
+            CreateCharacter(nightUI, AITypes.MangleAI, Translator.Get("Character.Mangle"), 0, max, LoadPortraitFromSheet((4, 1)));
+            CreateCharacter(nightUI, AITypes.BBAI, Translator.Get("Character.BB"), 0, max, LoadPortraitFromSheet((5, 1)));
+            CreateCharacter(nightUI, AITypes.PuppetAI, Translator.Get("Character.Puppet"), 0, maxPuppet, LoadPortraitFromSheet((1, 2)));
+            CreateCharacter(nightUI, AITypes.WFreddyAI, Translator.Get("Character.Freddy"), 0, max, LoadPortraitFromSheet((2, 2)));
+            CreateCharacter(nightUI, AITypes.WBonnieAI, Translator.Get("Character.Bonnie"), 0, max, LoadPortraitFromSheet((3, 2)));
+            CreateCharacter(nightUI, AITypes.WChicaAI, Translator.Get("Character.Chica"), 0, max, LoadPortraitFromSheet((4, 2)));
+            CreateCharacter(nightUI, AITypes.FOXYAI, Translator.Get("Character.Foxy"), 0, max, LoadPortraitFromSheet((5, 2)));
         }
     }
 

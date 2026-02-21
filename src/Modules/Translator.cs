@@ -4,12 +4,21 @@ using UnityEngine;
 
 namespace NightmareMode.Modules;
 
+/// <summary>
+/// Provides localization and translation services for the game.
+/// Loads JSON language files from embedded resources and provides text translations
+/// based on the current system language with fallback support.
+/// </summary>
 internal static class Translator
 {
     private const string LANG_PATH = "NightmareMode.Resources.Lang";
     private const SystemLanguage FALLBACK_LANGUAGE = SystemLanguage.English;
     private static Dictionary<SystemLanguage, LanguageData> _translations = [];
 
+    /// <summary>
+    /// Initializes the translation system by loading all available language files
+    /// from embedded resources. Called during mod startup.
+    /// </summary>
     internal static void Initialize()
     {
         SystemLanguage[] languages = (SystemLanguage[])Enum.GetValues(typeof(SystemLanguage));
@@ -34,6 +43,13 @@ internal static class Translator
         }
     }
 
+    /// <summary>
+    /// Attempts to load and parse a JSON language file from embedded resources.
+    /// </summary>
+    /// <param name="assembly">The assembly containing the embedded resources.</param>
+    /// <param name="resourcePath">The full path to the resource within the assembly.</param>
+    /// <param name="keyValuePairs">Output dictionary containing the parsed key-value pairs.</param>
+    /// <returns>True if the file was successfully loaded and parsed, false otherwise.</returns>
     private static bool TryLoadJsonFromResources(Assembly assembly, string resourcePath, out Dictionary<string, string> keyValuePairs)
     {
         keyValuePairs = [];
@@ -72,6 +88,12 @@ internal static class Translator
         }
     }
 
+    /// <summary>
+    /// Parses a JSON string into a dictionary of key-value pairs.
+    /// Handles basic JSON structure with string keys and values, including escaped characters.
+    /// </summary>
+    /// <param name="jsonContent">The JSON string to parse.</param>
+    /// <param name="keyValuePairs">The dictionary to populate with parsed key-value pairs.</param>
     private static void ParseJsonToDictionary(string jsonContent, Dictionary<string, string> keyValuePairs)
     {
         jsonContent = jsonContent.Trim();
@@ -157,6 +179,12 @@ internal static class Translator
         }
     }
 
+    /// <summary>
+    /// Retrieves a translated string for the specified key using the current system language.
+    /// Falls back to English if the translation is missing for the current language.
+    /// </summary>
+    /// <param name="key">The translation key to look up.</param>
+    /// <returns>The translated string, or a placeholder in the format "&lt;key&gt;" if not found.</returns>
     internal static string Get(string key)
     {
         SystemLanguage currentLanguage = Application.systemLanguage;
@@ -178,6 +206,13 @@ internal static class Translator
         return $"<{key}>";
     }
 
+    /// <summary>
+    /// Retrieves a translated string and formats it with the provided parameters.
+    /// Uses string.Format to insert parameters into the translated template.
+    /// </summary>
+    /// <param name="key">The translation key to look up.</param>
+    /// <param name="format">Optional format parameters to insert into the translated string.</param>
+    /// <returns>The formatted translated string, or the unformatted translation if formatting fails.</returns>
     internal static string Get(string key, params string[] format)
     {
         string value = Get(key);
@@ -198,6 +233,12 @@ internal static class Translator
         return value;
     }
 
+    /// <summary>
+    /// Converts a Unity SystemLanguage enum value to its corresponding language-region code.
+    /// Used for constructing file paths to language resources.
+    /// </summary>
+    /// <param name="systemLanguage">The system language to convert.</param>
+    /// <returns>A string in the format "xx_XX" representing the language and region code.</returns>
     internal static string GetLanguageAndRegionCode(SystemLanguage systemLanguage)
     {
         return systemLanguage switch

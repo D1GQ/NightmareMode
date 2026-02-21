@@ -1,7 +1,7 @@
-﻿using NightmareMode.Helpers;
-using NightmareMode.Items.Attributes;
-using NightmareMode.Items.Enums;
-using NightmareMode.Items.Interfaces;
+﻿using NightmareMode.Attributes;
+using NightmareMode.Enums;
+using NightmareMode.Helpers;
+using NightmareMode.Interfaces;
 using NightmareMode.Modules;
 using NightmareMode.Monos;
 using System.Collections;
@@ -10,17 +10,51 @@ using UnityEngine.UI;
 
 namespace NightmareMode.Managers;
 
+/// <summary>
+/// Central manager for night progression, challenge modes, and special events in the game.
+/// Handles loading night UI, managing current night/challenge state, and controlling power surge sequences.
+/// </summary>
 internal static class NightManager
 {
+    /// <summary>
+    /// Gets the summary note prefix text used in the log book.
+    /// </summary>
     internal static string SummaryNote => Translator.Get("Note.Summary") + " ";
 
+    /// <summary>
+    /// Gets the currently active time event (either a regular night or a challenge).
+    /// </summary>
     internal static ITimeEvent? Current => !IsChallengeNight ? CurrentNight : CurrentChallenge;
+
+    /// <summary>
+    /// Gets or sets the current regular night instance.
+    /// </summary>
     internal static INight? CurrentNight;
+
+    /// <summary>
+    /// Gets or sets the current challenge instance.
+    /// </summary>
     internal static IChallenge? CurrentChallenge;
+
+    /// <summary>
+    /// Gets or sets a value indicating whether the current game is a challenge night.
+    /// </summary>
     internal static bool IsChallengeNight;
+
+    /// <summary>
+    /// Gets or sets the ID of the currently active challenge.
+    /// </summary>
     internal static int CurrentChallengeId;
+
+    /// <summary>
+    /// Gets or sets a value indicating whether a power surge event is currently active.
+    /// </summary>
     internal static bool InPowerSurge;
 
+    /// <summary>
+    /// Loads the night selection UI, creating all night and challenge buttons with their appropriate
+    /// thumbnails, unlock requirements, and display names.
+    /// </summary>
     internal static void LoadNightUI()
     {
         var firstNight = Utils.FindInactive("Canvas/NightsPage/Night1");
@@ -49,6 +83,12 @@ internal static class NightManager
         NightUI.Create(Translator.Get("Challenge.Overtime.Title"), 4, NightsFlag.Night_6, NightType.Challenge);
     }
 
+    /// <summary>
+    /// Extracts the original thumbnail sprite from the game's built-in night selection UI.
+    /// Used to preserve the original night thumbnails for the modded night selection screen.
+    /// </summary>
+    /// <param name="night">The night number (1-5) to extract the thumbnail for.</param>
+    /// <returns>The extracted sprite, or null if extraction failed.</returns>
     private static Sprite? GetOriginalNightThumbnail(int night)
     {
         var nightObj = Utils.FindInactive($"Canvas/NightsPage/Night{night}");
@@ -68,6 +108,10 @@ internal static class NightManager
         return null;
     }
 
+    /// <summary>
+    /// Initializes the current night or challenge based on the game state.
+    /// Called when a night or challenge begins.
+    /// </summary>
     internal static void Init()
     {
         if (!IsChallengeNight)
@@ -82,6 +126,10 @@ internal static class NightManager
         }
     }
 
+    /// <summary>
+    /// Clears the current night/challenge state and resets related variables.
+    /// Called when returning to the main menu or after a night ends.
+    /// </summary>
     internal static void Clear()
     {
         CurrentNight = null;
@@ -95,21 +143,47 @@ internal static class NightManager
         }
     }
 
+    /// <summary>
+    /// Triggers the OnHour event for the current night or challenge.
+    /// Called when a new hour begins in-game.
+    /// </summary>
+    /// <param name="hour">The hour number that just began.</param>
     internal static void OnNewHour(int hour) => Current?.OnHour(hour);
 
+    /// <summary>
+    /// Triggers the OnHalfHour event for the current night or challenge.
+    /// Called at the half-hour mark during gameplay.
+    /// </summary>
+    /// <param name="hour">The current hour number.</param>
     internal static void OnHalfHour(int hour) => Current?.OnHalfHour(hour);
 
+    /// <summary>
+    /// Executes an action after a specified delay during a night.
+    /// Uses a Unity coroutine to handle the delayed execution.
+    /// </summary>
+    /// <param name="action">The action to execute after the delay.</param>
+    /// <param name="seconds">The delay duration in seconds.</param>
     internal static void DelayedNightAction(Action action, float seconds)
     {
         CatchedSingleton<PauseScript>.Instance?.StartCoroutine(CoDelayedNightAction(action, seconds));
     }
 
+    /// <summary>
+    /// Coroutine that waits for a specified delay and then invokes the given action.
+    /// </summary>
+    /// <param name="action">The action to invoke after the delay.</param>
+    /// <param name="delay">The delay duration in seconds.</param>
+    /// <returns>IEnumerator for coroutine execution.</returns>
     private static IEnumerator CoDelayedNightAction(Action action, float delay)
     {
         yield return new WaitForSeconds(delay);
         action.Invoke();
     }
 
+    /// <summary>
+    /// Triggers a power surge event, sequentially activating spot lights
+    /// to create a dramatic lighting effect.
+    /// </summary>
     internal static void PowerSurge()
     {
         InPowerSurge = true;
@@ -153,6 +227,11 @@ internal static class NightManager
         }, 8f);
     }
 
+    /// <summary>
+    /// Triggers a power outage effect after a power surge.
+    /// Instantiates a power outage visual effect and refreshes the reflection probe.
+    /// </summary>
+    /// <param name="delay">Delay before the power outage effect ends. Default is 4 seconds.</param>
     internal static void PowerSurgeOut(float delay = 4f)
     {
         InPowerSurge = true;

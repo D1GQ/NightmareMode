@@ -1,5 +1,6 @@
 ﻿using HarmonyLib;
 using NightmareMode.Managers;
+using NightmareMode.Modules.AI;
 
 namespace NightmareMode.Patches.Game.AI;
 
@@ -10,6 +11,6 @@ internal class PuppetScriptPatch
     [HarmonyPrefix]
     private static void Start_Prefix(PuppetScript __instance)
     {
-        AIManager.PuppetAI = __instance;
+        AIManager.PuppetAI = new PuppetAIWrapper(__instance);
     }
 }

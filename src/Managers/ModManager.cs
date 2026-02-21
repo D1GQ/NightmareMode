@@ -1,5 +1,5 @@
-﻿using NightmareMode.Items.Interfaces;
-using NightmareMode.Modules;
+﻿using NightmareMode.Interfaces;
+using NightmareMode.Monos;
 
 namespace NightmareMode.Managers;
 

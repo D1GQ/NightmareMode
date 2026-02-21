@@ -2,8 +2,8 @@
 using BepInEx.Configuration;
 using BepInEx.Logging;
 using HarmonyLib;
+using NightmareMode.Attributes;
 using NightmareMode.Data;
-using NightmareMode.Items.Attributes;
 using NightmareMode.Managers;
 using NightmareMode.Modules;
 using NightmareMode.Monos;

@@ -1,8 +1,8 @@
-﻿using NightmareMode.Data;
+﻿using NightmareMode.Attributes;
+using NightmareMode.Data;
+using NightmareMode.Enums;
 using NightmareMode.Helpers;
-using NightmareMode.Items.Attributes;
-using NightmareMode.Items.Enums;
-using NightmareMode.Items.Interfaces;
+using NightmareMode.Interfaces;
 using NightmareMode.Managers;
 using NightmareMode.Modules;
 using UnityEngine;
@@ -59,10 +59,10 @@ internal class OvertimeChallenge : IChallenge
     private void At_12AM()
     {
         Utils.SetStartTimeAllRandom(5f, 60f);
-        AIManager.PuppetAI?.SetStartTime(0f);
+        AIManager.PuppetAI?.StartTimer = 0f;
 
         Utils.SetDifficultyAll(0);
-        AIManager.PuppetAI?.SetDifficulty(10);
+        AIManager.PuppetAI?.Difficulty = 10;
 
         ShiftAI();
     }
@@ -79,58 +79,58 @@ internal class OvertimeChallenge : IChallenge
 
         if (_shifts[0])
         {
-            AIManager.Toy_FreddyAI?.SetDifficulty(GetToyFreddyAI());
-            AIManager.W_FreddyAI?.SetDifficulty(1);
+            AIManager.Toy_FreddyAI?.Difficulty = GetToyFreddyAI();
+            AIManager.W_FreddyAI?.Difficulty = 1;
         }
         else
         {
-            AIManager.Toy_FreddyAI?.SetDifficulty(1);
-            AIManager.W_FreddyAI?.SetDifficulty(GetWFreddyAI());
+            AIManager.Toy_FreddyAI?.Difficulty = 1;
+            AIManager.W_FreddyAI?.Difficulty = GetWFreddyAI();
         }
         if (_shifts[1])
         {
-            AIManager.Toy_BonnieAI?.SetDifficulty(GetToyBonnieAI());
-            AIManager.W_BonnieAI?.SetDifficulty(1);
+            AIManager.Toy_BonnieAI?.Difficulty = GetToyBonnieAI();
+            AIManager.W_BonnieAI?.Difficulty = 1;
         }
         else
         {
-            AIManager.Toy_BonnieAI?.SetDifficulty(1);
-            AIManager.W_BonnieAI?.SetDifficulty(GetWBonnieAI());
+            AIManager.Toy_BonnieAI?.Difficulty = 1;
+            AIManager.W_BonnieAI?.Difficulty = GetWBonnieAI();
         }
         if (_shifts[2])
         {
-            AIManager.Toy_ChicaAI?.SetDifficulty(GetToyChicaAI());
-            AIManager.W_ChicaAI?.SetDifficulty(1);
+            AIManager.Toy_ChicaAI?.Difficulty = GetToyChicaAI();
+            AIManager.W_ChicaAI?.Difficulty = 1;
         }
         else
         {
-            AIManager.Toy_ChicaAI?.SetDifficulty(1);
-            AIManager.W_ChicaAI?.SetDifficulty(GetWChicaAI());
+            AIManager.Toy_ChicaAI?.Difficulty = 1;
+            AIManager.W_ChicaAI?.Difficulty = GetWChicaAI();
         }
         if (_shifts[3])
         {
-            AIManager.MangleAI?.SetDifficulty(GetMangleAI());
-            AIManager.W_FoxyAI?.SetDifficulty(1);
+            AIManager.MangleAI?.Difficulty = GetMangleAI();
+            AIManager.W_FoxyAI?.Difficulty = 1;
         }
         else
         {
-            AIManager.MangleAI?.SetDifficulty(1);
-            AIManager.W_FoxyAI?.SetDifficulty(GetWFoxyAI());
+            AIManager.MangleAI?.Difficulty = 1;
+            AIManager.W_FoxyAI?.Difficulty = GetWFoxyAI();
         }
-        AIManager.BalloonBoyAI?.SetDifficulty(GetBBAI());
+        AIManager.BalloonBoyAI?.Difficulty = GetBBAI();
     }
 
     private void SetAIAll()
     {
-        AIManager.Toy_FreddyAI?.SetDifficulty(GetToyFreddyAI());
-        AIManager.Toy_BonnieAI?.SetDifficulty(GetToyBonnieAI());
-        AIManager.Toy_ChicaAI?.SetDifficulty(GetToyChicaAI());
-        AIManager.MangleAI?.SetDifficulty(GetMangleAI());
-        AIManager.BalloonBoyAI?.SetDifficulty(GetBBAI());
-        AIManager.W_FreddyAI?.SetDifficulty(GetWFreddyAI());
-        AIManager.W_BonnieAI?.SetDifficulty(GetWBonnieAI());
-        AIManager.W_ChicaAI?.SetDifficulty(GetWChicaAI());
-        AIManager.W_FoxyAI?.SetDifficulty(GetWFoxyAI());
+        AIManager.Toy_FreddyAI?.Difficulty = GetToyFreddyAI();
+        AIManager.Toy_BonnieAI?.Difficulty = GetToyBonnieAI();
+        AIManager.Toy_ChicaAI?.Difficulty = GetToyChicaAI();
+        AIManager.MangleAI?.Difficulty = GetMangleAI();
+        AIManager.BalloonBoyAI?.Difficulty = GetBBAI();
+        AIManager.W_FreddyAI?.Difficulty = GetWFreddyAI();
+        AIManager.W_BonnieAI?.Difficulty = GetWBonnieAI();
+        AIManager.W_ChicaAI?.Difficulty = GetWChicaAI();
+        AIManager.W_FoxyAI?.Difficulty = GetWFoxyAI();
     }
 
     private int GetToyFreddyAI() => Mathf.Clamp(_aiMultiplier + UnityEngine.Random.Range(2, 4), 0, 15);

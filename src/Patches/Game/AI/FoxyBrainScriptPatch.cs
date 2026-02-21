@@ -1,5 +1,6 @@
 ﻿using HarmonyLib;
 using NightmareMode.Managers;
+using NightmareMode.Modules.AI;
 
 namespace NightmareMode.Patches.Game.AI;
 
@@ -10,7 +11,7 @@ internal class FoxyBrainScriptPatch
     [HarmonyPrefix]
     private static bool Start_Prefix(FoxyBrainScript __instance)
     {
-        AIManager.W_FoxyAI = __instance;
+        AIManager.W_FoxyAI = new FoxyAIWrapper(__instance);
 
         if (!NightmarePlugin.ModEnabled) return true;
         return false;

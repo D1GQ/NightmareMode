@@ -1,5 +1,6 @@
 ﻿using HarmonyLib;
 using NightmareMode.Managers;
+using NightmareMode.Modules.AI;
 
 namespace NightmareMode.Patches.Game.AI;
 
@@ -10,7 +11,7 @@ internal class BBAIScriptPatch
     [HarmonyPrefix]
     private static bool Start_Prefix(BBAIScript __instance)
     {
-        AIManager.BalloonBoyAI = __instance;
+        AIManager.BalloonBoyAI = new BBAIWrapper(__instance);
 
         if (!NightmarePlugin.ModEnabled) return true;
         return false;

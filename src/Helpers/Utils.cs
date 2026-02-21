@@ -1,4 +1,4 @@
-﻿using NightmareMode.Items.Enums;
+﻿using NightmareMode.Enums;
 using NightmareMode.Managers;
 using NightmareMode.Modules;
 using System.Collections;
@@ -252,515 +252,118 @@ internal static class Utils
         switch (type)
         {
             case AITypes.FreddyAI:
-                AIManager.Toy_FreddyAI?.SetDifficulty(diff);
+                AIManager.Toy_FreddyAI?.Difficulty = diff;
                 break;
             case AITypes.BonnieAI:
-                AIManager.Toy_BonnieAI?.SetDifficulty(diff);
+                AIManager.Toy_BonnieAI?.Difficulty = diff;
                 break;
             case AITypes.ChicaAI:
-                AIManager.Toy_ChicaAI?.SetDifficulty(diff);
+                AIManager.Toy_ChicaAI?.Difficulty = diff;
                 break;
             case AITypes.MangleAI:
-                AIManager.MangleAI?.SetDifficulty(diff);
+                AIManager.MangleAI?.Difficulty = diff;
                 break;
             case AITypes.BBAI:
-                AIManager.BalloonBoyAI?.SetDifficulty(diff);
+                AIManager.BalloonBoyAI?.Difficulty = diff;
                 break;
             case AITypes.PuppetAI:
-                AIManager.PuppetAI?.SetDifficulty(diff);
+                AIManager.PuppetAI?.Difficulty = diff;
                 break;
             case AITypes.WFreddyAI:
-                AIManager.W_FreddyAI?.SetDifficulty(diff);
+                AIManager.W_FreddyAI?.Difficulty = diff;
                 break;
             case AITypes.WBonnieAI:
-                AIManager.W_BonnieAI?.SetDifficulty(diff);
+                AIManager.W_BonnieAI?.Difficulty = diff;
                 break;
             case AITypes.WChicaAI:
-                AIManager.W_ChicaAI?.SetDifficulty(diff);
+                AIManager.W_ChicaAI?.Difficulty = diff;
                 break;
             case AITypes.FOXYAI:
-                AIManager.W_FoxyAI?.SetDifficulty(diff);
+                AIManager.W_FoxyAI?.Difficulty = diff;
                 break;
         }
     }
-    internal static void SetDifficulty(this AnimatronicAIScript AI, int diff)
-    {
-        diff = Mathf.Clamp(diff, 0, 100);
-        AI.enabled = diff > 0;
-        AI.Difficulty = diff;
 
-        var positionScript = AI.FirstPosition;
-        while (positionScript != null)
-        {
-            var oldPositionScript = positionScript;
-            oldPositionScript.Dif = diff;
-            positionScript = oldPositionScript.NextPos;
-        }
-    }
-    internal static void SetDifficulty(this ToyFreddyBrain AI, int diff)
-    {
-        diff = Mathf.Clamp(diff, 0, 100);
-        AI.enabled = diff > 0;
-        AI.Difficulty = diff;
-    }
-    internal static void SetDifficulty(this BBAIScript AI, int diff)
-    {
-        diff = Mathf.Clamp(diff, 0, 100);
-        AI.enabled = diff > 0;
-        AI.Difficulty = diff;
-    }
-    internal static void SetDifficulty(this PuppetScript AI, int diff)
-    {
-        diff = Mathf.Clamp(diff, 0, 100);
-        AI.enabled = diff > 0;
-        AI.dif = diff;
-    }
-    internal static void SetDifficulty(this FoxyBrainScript AI, int diff)
-    {
-        diff = Mathf.Clamp(diff, 0, 100);
-        if (diff <= 0)
-        {
-            AI.SetActive(false);
-        }
-        AI.enabled = diff > 0;
-        AI.Difficulty = diff;
-    }
     internal static void SetDifficultyAll(int diff)
     {
-        AIManager.Toy_FreddyAI?.SetDifficulty(diff);
-        AIManager.Toy_BonnieAI?.SetDifficulty(diff);
-        AIManager.Toy_ChicaAI?.SetDifficulty(diff);
-        AIManager.MangleAI?.SetDifficulty(diff);
-        AIManager.BalloonBoyAI?.SetDifficulty(diff);
-        AIManager.PuppetAI?.SetDifficulty(diff);
-        AIManager.W_FreddyAI?.SetDifficulty(diff);
-        AIManager.W_BonnieAI?.SetDifficulty(diff);
-        AIManager.W_ChicaAI?.SetDifficulty(diff);
-        AIManager.W_FoxyAI?.SetDifficulty(diff);
-    }
-    internal static void SetDifficultyAllRandom(int min, int max)
-    {
-        AIManager.Toy_FreddyAI?.SetDifficulty(UnityEngine.Random.Range(min, max));
-        AIManager.Toy_BonnieAI?.SetDifficulty(UnityEngine.Random.Range(min, max));
-        AIManager.Toy_ChicaAI?.SetDifficulty(UnityEngine.Random.Range(min, max));
-        AIManager.MangleAI?.SetDifficulty(UnityEngine.Random.Range(min, max));
-        AIManager.BalloonBoyAI?.SetDifficulty(UnityEngine.Random.Range(min, max));
-        AIManager.PuppetAI?.SetDifficulty(UnityEngine.Random.Range(min, max));
-        AIManager.W_FreddyAI?.SetDifficulty(UnityEngine.Random.Range(min, max));
-        AIManager.W_BonnieAI?.SetDifficulty(UnityEngine.Random.Range(min, max));
-        AIManager.W_ChicaAI?.SetDifficulty(UnityEngine.Random.Range(min, max));
-        AIManager.W_FoxyAI?.SetDifficulty(UnityEngine.Random.Range(min, max));
+        AIManager.Toy_FreddyAI?.Difficulty = diff;
+        AIManager.Toy_BonnieAI?.Difficulty = diff;
+        AIManager.Toy_ChicaAI?.Difficulty = diff;
+        AIManager.MangleAI?.Difficulty = diff;
+        AIManager.BalloonBoyAI?.Difficulty = diff;
+        AIManager.PuppetAI?.Difficulty = diff;
+        AIManager.W_FreddyAI?.Difficulty = diff;
+        AIManager.W_BonnieAI?.Difficulty = diff;
+        AIManager.W_ChicaAI?.Difficulty = diff;
+        AIManager.W_FoxyAI?.Difficulty = diff;
     }
 
-    internal static void AddDifficulty(this AnimatronicAIScript AI, int diff) => AI.SetDifficulty(AI.GetDifficulty() + diff);
-    internal static void AddDifficulty(this ToyFreddyBrain AI, int diff) => AI.SetDifficulty(AI.GetDifficulty() + diff);
-    internal static void AddDifficulty(this BBAIScript AI, int diff) => AI.SetDifficulty(AI.GetDifficulty() + diff);
-    internal static void AddDifficulty(this PuppetScript AI, int diff) => AI.SetDifficulty(AI.GetDifficulty() + diff);
-    internal static void AddDifficulty(this FoxyBrainScript AI, int diff) => AI.SetDifficulty(AI.GetDifficulty() + diff);
+    internal static void SetDifficultyAllRandom(int min, int max)
+    {
+        AIManager.Toy_FreddyAI?.Difficulty = UnityEngine.Random.Range(min, max);
+        AIManager.Toy_BonnieAI?.Difficulty = UnityEngine.Random.Range(min, max);
+        AIManager.Toy_ChicaAI?.Difficulty = UnityEngine.Random.Range(min, max);
+        AIManager.MangleAI?.Difficulty = UnityEngine.Random.Range(min, max);
+        AIManager.BalloonBoyAI?.Difficulty = UnityEngine.Random.Range(min, max);
+        AIManager.PuppetAI?.Difficulty = UnityEngine.Random.Range(min, max);
+        AIManager.W_FreddyAI?.Difficulty = UnityEngine.Random.Range(min, max);
+        AIManager.W_BonnieAI?.Difficulty = UnityEngine.Random.Range(min, max);
+        AIManager.W_ChicaAI?.Difficulty = UnityEngine.Random.Range(min, max);
+        AIManager.W_FoxyAI?.Difficulty = UnityEngine.Random.Range(min, max);
+    }
+
     internal static void AddDifficultyAll(int diff)
     {
-        AIManager.Toy_FreddyAI?.AddDifficulty(diff);
-        AIManager.Toy_BonnieAI?.AddDifficulty(diff);
-        AIManager.Toy_ChicaAI?.AddDifficulty(diff);
-        AIManager.MangleAI?.AddDifficulty(diff);
-        AIManager.BalloonBoyAI?.AddDifficulty(diff);
-        AIManager.PuppetAI?.AddDifficulty(diff);
-        AIManager.W_FreddyAI?.AddDifficulty(diff);
-        AIManager.W_BonnieAI?.AddDifficulty(diff);
-        AIManager.W_ChicaAI?.AddDifficulty(diff);
-        AIManager.W_FoxyAI?.AddDifficulty(diff);
+        AIManager.Toy_FreddyAI?.Difficulty += diff;
+        AIManager.Toy_BonnieAI?.Difficulty += diff;
+        AIManager.Toy_ChicaAI?.Difficulty += diff;
+        AIManager.MangleAI?.Difficulty += diff;
+        AIManager.BalloonBoyAI?.Difficulty += diff;
+        AIManager.PuppetAI?.Difficulty += diff;
+        AIManager.W_FreddyAI?.Difficulty += diff;
+        AIManager.W_BonnieAI?.Difficulty += diff;
+        AIManager.W_ChicaAI?.Difficulty += diff;
+        AIManager.W_FoxyAI?.Difficulty += diff;
     }
     internal static void AddDifficultyAllRandom(int min, int max)
     {
-        AIManager.Toy_FreddyAI?.AddDifficulty(UnityEngine.Random.Range(min, max));
-        AIManager.Toy_BonnieAI?.AddDifficulty(UnityEngine.Random.Range(min, max));
-        AIManager.Toy_ChicaAI?.AddDifficulty(UnityEngine.Random.Range(min, max));
-        AIManager.MangleAI?.AddDifficulty(UnityEngine.Random.Range(min, max));
-        AIManager.BalloonBoyAI?.AddDifficulty(UnityEngine.Random.Range(min, max));
-        AIManager.PuppetAI?.AddDifficulty(UnityEngine.Random.Range(min, max));
-        AIManager.W_FreddyAI?.AddDifficulty(UnityEngine.Random.Range(min, max));
-        AIManager.W_BonnieAI?.AddDifficulty(UnityEngine.Random.Range(min, max));
-        AIManager.W_ChicaAI?.AddDifficulty(UnityEngine.Random.Range(min, max));
-        AIManager.W_FoxyAI?.AddDifficulty(UnityEngine.Random.Range(min, max));
-    }
-
-    internal static int GetDifficulty(AITypes type)
-    {
-        return type switch
-        {
-            AITypes.FreddyAI => AIManager.Toy_FreddyAI?.GetDifficulty() ?? -1,
-            AITypes.BonnieAI => AIManager.Toy_BonnieAI?.GetDifficulty() ?? -1,
-            AITypes.ChicaAI => AIManager.Toy_ChicaAI?.GetDifficulty() ?? -1,
-            AITypes.MangleAI => AIManager.MangleAI?.GetDifficulty() ?? -1,
-            AITypes.BBAI => AIManager.BalloonBoyAI?.GetDifficulty() ?? -1,
-            AITypes.PuppetAI => AIManager.PuppetAI?.GetDifficulty() ?? -1,
-            AITypes.WFreddyAI => AIManager.W_FreddyAI?.GetDifficulty() ?? -1,
-            AITypes.WBonnieAI => AIManager.W_BonnieAI?.GetDifficulty() ?? -1,
-            AITypes.WChicaAI => AIManager.W_ChicaAI?.GetDifficulty() ?? -1,
-            AITypes.FOXYAI => AIManager.W_FoxyAI?.GetDifficulty() ?? -1,
-            _ => -1,
-        };
-    }
-    internal static int GetDifficulty(this AnimatronicAIScript AI) => (int)AI.Difficulty;
-    internal static int GetDifficulty(this ToyFreddyBrain AI) => (int)AI.Difficulty;
-    internal static int GetDifficulty(this BBAIScript AI) => (int)AI.Difficulty;
-    internal static int GetDifficulty(this PuppetScript AI) => (int)AI.dif;
-    internal static int GetDifficulty(this FoxyBrainScript AI) => (int)AI.Difficulty;
-
-    internal static void SetStartTime(AITypes type, float time)
-    {
-        switch (type)
-        {
-            case AITypes.FreddyAI:
-                AIManager.Toy_FreddyAI?.SetStartTime(time);
-                break;
-            case AITypes.BonnieAI:
-                AIManager.Toy_BonnieAI?.SetStartTime(time);
-                break;
-            case AITypes.ChicaAI:
-                AIManager.Toy_ChicaAI?.SetStartTime(time);
-                break;
-            case AITypes.MangleAI:
-                AIManager.MangleAI?.SetStartTime(time);
-                break;
-            case AITypes.BBAI:
-                AIManager.BalloonBoyAI?.SetStartTime(time);
-                break;
-            case AITypes.PuppetAI:
-                AIManager.PuppetAI?.SetStartTime(time);
-                break;
-            case AITypes.WFreddyAI:
-                AIManager.W_FreddyAI?.SetStartTime(time);
-                break;
-            case AITypes.WBonnieAI:
-                AIManager.W_BonnieAI?.SetStartTime(time);
-                break;
-            case AITypes.WChicaAI:
-                AIManager.W_ChicaAI?.SetStartTime(time);
-                break;
-            case AITypes.FOXYAI:
-                AIManager.W_FoxyAI?.SetStartTime(time);
-                break;
-        }
-    }
-    internal static void SetStartTime(this AnimatronicAIScript AI, float time)
-    {
-        AI.StartTimer = time;
-    }
-    internal static void SetStartTime(this ToyFreddyBrain AI, float time)
-    {
-        AI.StartTimer = time;
-    }
-    internal static void SetStartTime(this BBAIScript AI, float time)
-    {
-        AI.StartTimer = time;
-    }
-    internal static void SetStartTime(this PuppetScript AI, float time)
-    {
-        AI.start = time;
-    }
-    internal static void SetStartTime(this FoxyBrainScript AI, float time)
-    {
-        AI.StartTimer = time;
+        AIManager.Toy_FreddyAI?.Difficulty += UnityEngine.Random.Range(min, max);
+        AIManager.Toy_BonnieAI?.Difficulty += UnityEngine.Random.Range(min, max);
+        AIManager.Toy_ChicaAI?.Difficulty += UnityEngine.Random.Range(min, max);
+        AIManager.MangleAI?.Difficulty += UnityEngine.Random.Range(min, max);
+        AIManager.BalloonBoyAI?.Difficulty += UnityEngine.Random.Range(min, max);
+        AIManager.PuppetAI?.Difficulty += UnityEngine.Random.Range(min, max);
+        AIManager.W_FreddyAI?.Difficulty += UnityEngine.Random.Range(min, max);
+        AIManager.W_BonnieAI?.Difficulty += UnityEngine.Random.Range(min, max);
+        AIManager.W_ChicaAI?.Difficulty += UnityEngine.Random.Range(min, max);
+        AIManager.W_FoxyAI?.Difficulty += UnityEngine.Random.Range(min, max);
     }
 
     internal static void SetStartTimeAll(float time)
     {
-        AIManager.Toy_FreddyAI?.SetStartTime(time);
-        AIManager.Toy_BonnieAI?.SetStartTime(time);
-        AIManager.Toy_ChicaAI?.SetStartTime(time);
-        AIManager.MangleAI?.SetStartTime(time);
-        AIManager.BalloonBoyAI?.SetStartTime(time);
-        AIManager.PuppetAI?.SetStartTime(time);
-        AIManager.W_FreddyAI?.SetStartTime(time);
-        AIManager.W_BonnieAI?.SetStartTime(time);
-        AIManager.W_ChicaAI?.SetStartTime(time);
-        AIManager.W_FoxyAI?.SetStartTime(time);
-    }
-
-    internal static void SetStartTimeSelected(float time, params AITypes[] AIs)
-    {
-        var AIsHashSet = AIs.ToHashSet();
-        if (AIsHashSet.Contains(AITypes.FreddyAI))
-            AIManager.Toy_FreddyAI?.SetStartTime(time);
-        if (AIsHashSet.Contains(AITypes.FreddyAI))
-            AIManager.Toy_BonnieAI?.SetStartTime(time);
-        if (AIsHashSet.Contains(AITypes.FreddyAI))
-            AIManager.Toy_ChicaAI?.SetStartTime(time);
-        if (AIsHashSet.Contains(AITypes.FreddyAI))
-            AIManager.MangleAI?.SetStartTime(time);
-        if (AIsHashSet.Contains(AITypes.FreddyAI))
-            AIManager.BalloonBoyAI?.SetStartTime(time);
-        if (AIsHashSet.Contains(AITypes.FreddyAI))
-            AIManager.PuppetAI?.SetStartTime(time);
-        if (AIsHashSet.Contains(AITypes.FreddyAI))
-            AIManager.W_FreddyAI?.SetStartTime(time);
-        if (AIsHashSet.Contains(AITypes.FreddyAI))
-            AIManager.W_BonnieAI?.SetStartTime(time);
-        if (AIsHashSet.Contains(AITypes.FreddyAI))
-            AIManager.W_ChicaAI?.SetStartTime(time);
-        if (AIsHashSet.Contains(AITypes.FreddyAI))
-            AIManager.W_FoxyAI?.SetStartTime(time);
+        AIManager.Toy_FreddyAI?.StartTimer = time;
+        AIManager.Toy_BonnieAI?.StartTimer = time;
+        AIManager.Toy_ChicaAI?.StartTimer = time;
+        AIManager.MangleAI?.StartTimer = time;
+        AIManager.BalloonBoyAI?.StartTimer = time;
+        AIManager.PuppetAI?.StartTimer = time;
+        AIManager.W_FreddyAI?.StartTimer = time;
+        AIManager.W_BonnieAI?.StartTimer = time;
+        AIManager.W_ChicaAI?.StartTimer = time;
+        AIManager.W_FoxyAI?.StartTimer = time;
     }
 
     internal static void SetStartTimeAllRandom(float min, float max)
     {
-        AIManager.Toy_FreddyAI?.SetStartTime(UnityEngine.Random.Range(min, max));
-        AIManager.Toy_BonnieAI?.SetStartTime(UnityEngine.Random.Range(min, max));
-        AIManager.Toy_ChicaAI?.SetStartTime(UnityEngine.Random.Range(min, max));
-        AIManager.MangleAI?.SetStartTime(UnityEngine.Random.Range(min, max));
-        AIManager.BalloonBoyAI?.SetStartTime(UnityEngine.Random.Range(min, max));
-        AIManager.PuppetAI?.SetStartTime(UnityEngine.Random.Range(min, max));
-        AIManager.W_FreddyAI?.SetStartTime(UnityEngine.Random.Range(min, max));
-        AIManager.W_BonnieAI?.SetStartTime(UnityEngine.Random.Range(min, max));
-        AIManager.W_ChicaAI?.SetStartTime(UnityEngine.Random.Range(min, max));
-        AIManager.W_FoxyAI?.SetStartTime(UnityEngine.Random.Range(min, max));
-    }
-
-    internal static void SetStartTimeSelectedRandom(float min, float max, params AITypes[] AIs)
-    {
-        var AIsHashSet = AIs.ToHashSet();
-        if (AIsHashSet.Contains(AITypes.FreddyAI))
-            AIManager.Toy_FreddyAI?.SetStartTime(UnityEngine.Random.Range(min, max));
-        if (AIsHashSet.Contains(AITypes.FreddyAI))
-            AIManager.Toy_BonnieAI?.SetStartTime(UnityEngine.Random.Range(min, max));
-        if (AIsHashSet.Contains(AITypes.FreddyAI))
-            AIManager.Toy_ChicaAI?.SetStartTime(UnityEngine.Random.Range(min, max));
-        if (AIsHashSet.Contains(AITypes.FreddyAI))
-            AIManager.MangleAI?.SetStartTime(UnityEngine.Random.Range(min, max));
-        if (AIsHashSet.Contains(AITypes.FreddyAI))
-            AIManager.BalloonBoyAI?.SetStartTime(UnityEngine.Random.Range(min, max));
-        if (AIsHashSet.Contains(AITypes.FreddyAI))
-            AIManager.PuppetAI?.SetStartTime(UnityEngine.Random.Range(min, max));
-        if (AIsHashSet.Contains(AITypes.FreddyAI))
-            AIManager.W_FreddyAI?.SetStartTime(UnityEngine.Random.Range(min, max));
-        if (AIsHashSet.Contains(AITypes.FreddyAI))
-            AIManager.W_BonnieAI?.SetStartTime(UnityEngine.Random.Range(min, max));
-        if (AIsHashSet.Contains(AITypes.FreddyAI))
-            AIManager.W_ChicaAI?.SetStartTime(UnityEngine.Random.Range(min, max));
-        if (AIsHashSet.Contains(AITypes.FreddyAI))
-            AIManager.W_FoxyAI?.SetStartTime(UnityEngine.Random.Range(min, max));
-    }
-
-    internal static void MoveToPos(this AnimatronicAIScript AI, int index) => AI.MoveToPos(AI.GetPose(index));
-
-    internal static void MoveToPos(this AnimatronicAIScript AI, AnimatronicPositionScript? positionScript)
-    {
-        var pos = AI.GetActivePose();
-        if (pos != null)
-        {
-            pos.Static.wait += 1f;
-            pos.Model.SetActive(false);
-            pos.ACTIVE = false;
-        }
-        else
-        {
-            if (!AI.OffStage)
-            {
-                if (!AI.Withered)
-                {
-                    AI.Stage.Lower();
-                }
-
-                if (AI.Withered || AI.Stage.down)
-                {
-                    AI.StageModel.SetActive(false);
-                    AI.StageStatic.wait += 1f;
-                    AI.OffStage = true;
-                    AI.StartTimer = 0f;
-                }
-            }
-        }
-
-        positionScript?.Activate();
-    }
-
-    internal static bool IsInOffice(this AnimatronicAIScript AI) => AI.GetPoses().Last()?.OfficePosition?.activeInHierarchy == true;
-    internal static void MoveToOffice(this AnimatronicAIScript AI)
-    {
-        AI.MoveToPos(null);
-        AI.GetPoses().Last()?.OfficePosition?.SetActive(true);
-    }
-
-    internal static void TryMoveNextPos(this AnimatronicAIScript AI, bool force = false)
-    {
-        var pos = AI.GetActivePose();
-        if (pos != null)
-        {
-            if (!force)
-            {
-                pos.Timer = 0;
-            }
-            else
-            {
-                pos.NextPos?.Activate();
-                pos.Static.wait += 1f;
-                pos.Model.SetActive(false);
-                pos.ACTIVE = false;
-            }
-        }
-        else
-        {
-            AI.SetStartTime(0f);
-        }
-    }
-
-    internal static void TryMoveNextPos(this ToyFreddyBrain AI, bool force = false)
-    {
-        static void TryShutDownBreaker(ToyFreddyPositionScript breaker)
-        {
-            if (breaker.Arrived)
-            {
-                breaker.OutageTimer = 0f;
-            }
-        }
-
-        if (!AI.Active)
-        {
-            AI.StartTimer = 0f;
-        }
-        else if (AI.Moving)
-        {
-            AI.MoveTimer = 0f;
-        }
-        else
-        {
-            if (!force) return;
-
-            TryShutDownBreaker(AI.choice1);
-            TryShutDownBreaker(AI.choice2);
-            TryShutDownBreaker(AI.choice3);
-            TryShutDownBreaker(AI.choice4);
-        }
-    }
-
-    internal static void TryMoveNextPos(this BBAIScript AI, bool force = false)
-    {
-        if (!AI.Active)
-        {
-            AI.StartTimer = 0f;
-        }
-        else if (!AI.BB1.Active && !!AI.BB2.Active)
-        {
-            AI.Timer = 0f;
-        }
-        else
-        {
-            if (!force) return;
-            if (AI.BB1.Active)
-            {
-                AI.BB1.prog = 0f;
-                AI.BB1.timer = 0f;
-            }
-            else if (AI.BB2.Active)
-            {
-                AI.BB2.prog = 0f;
-                AI.BB2.timer = 0f;
-            }
-        }
-    }
-
-    internal static float GetPoseTimer(this AnimatronicPositionScript animatronicPosition) => animatronicPosition.Timer;
-    internal static void SetPoseTimer(this AnimatronicPositionScript animatronicPosition, float time) => animatronicPosition.Timer = time;
-    internal static void AddPoseTimer(this AnimatronicPositionScript animatronicPosition, float time) => animatronicPosition.Timer += time;
-
-    internal static AnimatronicPositionScript? GetActivePose(this AnimatronicAIScript AI)
-    {
-        var pos = AI.FirstPosition;
-        while (pos != null)
-        {
-            if (pos.Model.activeInHierarchy)
-            {
-                return pos;
-            }
-
-            pos = pos.NextPos;
-        }
-        return null;
-    }
-
-    internal static int GetPoseIndex(this AnimatronicAIScript AI) => AI.GetPoseIndex(AI.GetActivePose());
-
-    internal static int GetPoseIndex(this AnimatronicAIScript AI, AnimatronicPositionScript? positionScript)
-    {
-        if (positionScript == null) return -1;
-        var pos = AI.FirstPosition;
-        int index = 0;
-        while (pos != null)
-        {
-            if (pos == positionScript)
-            {
-                return index;
-            }
-
-            index++;
-            pos = pos.NextPos;
-        }
-        return -1;
-    }
-
-    internal static AnimatronicPositionScript[] GetPoses(this AnimatronicAIScript AI)
-    {
-        List<AnimatronicPositionScript> poses = [];
-        var pos = AI.FirstPosition;
-        while (pos != null)
-        {
-            poses.Add(pos);
-            pos = pos.NextPos;
-        }
-        return [.. poses];
-    }
-
-    internal static AnimatronicPositionScript? GetPose(this AnimatronicAIScript AI, int index)
-    {
-        if (index < 0 || AI.FirstPosition == null)
-            return null;
-
-        var pos = AI.FirstPosition;
-        for (int i = 0; i < index; i++)
-        {
-            pos = pos.NextPos;
-            if (pos == null)
-                return null;
-        }
-        return pos;
-    }
-
-    internal static int GetBreakerIndex(this ToyFreddyBrain AI)
-    {
-        if (AI.choice1.Arrived)
-        {
-            return 1;
-        }
-        else if (AI.choice2.Arrived)
-        {
-            return 2;
-        }
-        else if (AI.choice3.Arrived)
-        {
-            return 3;
-        }
-        else if (AI.choice4.Arrived)
-        {
-            return 4;
-        }
-        return 0;
-    }
-
-    internal static void SetActive(this FoxyBrainScript AI, bool active)
-    {
-        if (AI.Active == active) return;
-
-        if (!AI.Active && active)
-        {
-            AI.StartTimer = 0f;
-        }
-        else if (AI.Active && !active)
-        {
-            AI.StartTimer = UnityEngine.Random.Range(610, 810) / 10f - AI.Difficulty * 2f;
-        }
-
-        AI.Foxy.SetBool("Active", active);
-        AI.Active = active;
+        AIManager.Toy_FreddyAI?.StartTimer = UnityEngine.Random.Range(min, max);
+        AIManager.Toy_BonnieAI?.StartTimer = UnityEngine.Random.Range(min, max);
+        AIManager.Toy_ChicaAI?.StartTimer = UnityEngine.Random.Range(min, max);
+        AIManager.MangleAI?.StartTimer = UnityEngine.Random.Range(min, max);
+        AIManager.BalloonBoyAI?.StartTimer = UnityEngine.Random.Range(min, max);
+        AIManager.PuppetAI?.StartTimer = UnityEngine.Random.Range(min, max);
+        AIManager.W_FreddyAI?.StartTimer = UnityEngine.Random.Range(min, max);
+        AIManager.W_BonnieAI?.StartTimer = UnityEngine.Random.Range(min, max);
+        AIManager.W_ChicaAI?.StartTimer = UnityEngine.Random.Range(min, max);
+        AIManager.W_FoxyAI?.StartTimer = UnityEngine.Random.Range(min, max);
     }
 }

@@ -1,6 +1,6 @@
-﻿using NightmareMode.Helpers;
-using NightmareMode.Items.Attributes;
-using NightmareMode.Items.Interfaces;
+﻿using NightmareMode.Attributes;
+using NightmareMode.Helpers;
+using NightmareMode.Interfaces;
 using NightmareMode.Managers;
 using UnityEngine;
 
@@ -48,26 +48,26 @@ internal class Night4 : INight
     private void At_12AM()
     {
         Utils.SetStartTimeAll(0f);
-        AIManager.Toy_BonnieAI?.SetStartTime(30f);
-        AIManager.Toy_ChicaAI?.SetStartTime(30f);
-        AIManager.MangleAI?.SetStartTime(30f);
-        AIManager.W_FreddyAI?.SetStartTime(30f);
-        AIManager.W_BonnieAI?.SetStartTime(30f);
-        AIManager.W_ChicaAI?.SetStartTime(30f);
-        AIManager.W_FoxyAI?.SetStartTime(15f);
+        AIManager.Toy_BonnieAI?.StartTimer = 30f;
+        AIManager.Toy_ChicaAI?.StartTimer = 30f;
+        AIManager.MangleAI?.StartTimer = 30f;
+        AIManager.W_FreddyAI?.StartTimer = 30f;
+        AIManager.W_BonnieAI?.StartTimer = 30f;
+        AIManager.W_ChicaAI?.StartTimer = 30f;
+        AIManager.W_FoxyAI?.StartTimer = 15f;
 
         Utils.SetDifficultyAll(0);
-        AIManager.Toy_FreddyAI?.SetDifficulty(4);
-        AIManager.Toy_BonnieAI?.SetDifficulty(6);
-        AIManager.Toy_ChicaAI?.SetDifficulty(6);
-        AIManager.MangleAI?.SetDifficulty(10);
-        AIManager.BalloonBoyAI?.SetDifficulty(5);
-        AIManager.PuppetAI?.SetDifficulty(8);
+        AIManager.Toy_FreddyAI?.Difficulty = 4;
+        AIManager.Toy_BonnieAI?.Difficulty = 6;
+        AIManager.Toy_ChicaAI?.Difficulty = 6;
+        AIManager.MangleAI?.Difficulty = 10;
+        AIManager.BalloonBoyAI?.Difficulty = 5;
+        AIManager.PuppetAI?.Difficulty = 8;
 
-        AIManager.W_FreddyAI?.SetDifficulty(2);
-        AIManager.W_BonnieAI?.SetDifficulty(8);
-        AIManager.W_ChicaAI?.SetDifficulty(8);
-        AIManager.W_FoxyAI?.SetDifficulty(3);
+        AIManager.W_FreddyAI?.Difficulty = 2;
+        AIManager.W_BonnieAI?.Difficulty = 8;
+        AIManager.W_ChicaAI?.Difficulty = 8;
+        AIManager.W_FoxyAI?.Difficulty = 3;
 
         NightManager.DelayedNightAction(() =>
         {
@@ -80,24 +80,24 @@ internal class Night4 : INight
                 () => AIManager.W_ChicaAI?.TryMoveNextPos(),
                 () =>
                 {
-                    AIManager.Toy_FreddyAI?.SetDifficulty(3);
+                    AIManager.Toy_FreddyAI?.Difficulty = 3;
                     AIManager.W_ChicaAI?.MoveToPos(2);
                     if (AIManager.BalloonBoyAI != null)
                     {
-                        AIManager.BalloonBoyAI.SetStartTime(0);
+                        AIManager.BalloonBoyAI.StartTimer = 0f;
 
                         if (!AIManager.BalloonBoyAI.Active)
                         {
-                            AudioClip clip = AIManager.BalloonBoyAI.LeaveSounds[UnityEngine.Random.Range(0, AIManager.BalloonBoyAI.LeaveSounds.Length)];
-                            AIManager.BalloonBoyAI.LeaveSound.clip = clip;
-                            AIManager.BalloonBoyAI.LeaveSound.Play();
-                            AIManager.BalloonBoyAI.Timer = UnityEngine.Random.Range(110, 310) / 10f;
-                            AIManager.BalloonBoyAI.campos.SetActive(false);
-                            AIManager.BalloonBoyAI.CamStatic.wait += 1f;
-                            AIManager.BalloonBoyAI.Active = true;
+                            AudioClip clip = AIManager.BalloonBoyAI.AI.LeaveSounds[UnityEngine.Random.Range(0, AIManager.BalloonBoyAI.AI.LeaveSounds.Length)];
+                            AIManager.BalloonBoyAI.AI.LeaveSound.clip = clip;
+                            AIManager.BalloonBoyAI.AI.LeaveSound.Play();
+                            AIManager.BalloonBoyAI.AI.Timer = UnityEngine.Random.Range(110, 310) / 10f;
+                            AIManager.BalloonBoyAI.AI.campos.SetActive(false);
+                            AIManager.BalloonBoyAI.AI.CamStatic.wait += 1f;
+                            AIManager.BalloonBoyAI.AI.Active = true;
                         }
 
-                        AIManager.BalloonBoyAI.Timer = 0f;
+                        AIManager.BalloonBoyAI.StartTimer = 0f;
                     }
 
                     NightManager.DelayedNightAction(() =>
@@ -120,10 +120,10 @@ internal class Night4 : INight
 
     private void At_1AM()
     {
-        AIManager.Toy_BonnieAI?.SetDifficulty(8);
-        AIManager.Toy_ChicaAI?.SetDifficulty(8);
-        AIManager.W_BonnieAI?.SetDifficulty(6);
-        AIManager.W_ChicaAI?.SetDifficulty(6);
+        AIManager.Toy_BonnieAI?.Difficulty = 8;
+        AIManager.Toy_ChicaAI?.Difficulty = 8;
+        AIManager.W_BonnieAI?.Difficulty = 6;
+        AIManager.W_ChicaAI?.Difficulty = 6;
 
         AIManager.Toy_FreddyAI?.TryMoveNextPos();
 
@@ -136,10 +136,10 @@ internal class Night4 : INight
 
     private void At_2AM()
     {
-        AIManager.W_FreddyAI?.SetDifficulty(4);
-        AIManager.W_BonnieAI?.SetDifficulty(8);
-        AIManager.W_ChicaAI?.SetDifficulty(8);
-        AIManager.W_FoxyAI?.SetDifficulty(4);
+        AIManager.W_FreddyAI?.Difficulty = 4;
+        AIManager.W_BonnieAI?.Difficulty = 8;
+        AIManager.W_ChicaAI?.Difficulty = 8;
+        AIManager.W_FoxyAI?.Difficulty = 4;
 
         AIManager.Toy_BonnieAI?.TryMoveNextPos();
         AIManager.W_ChicaAI?.TryMoveNextPos();
@@ -147,9 +147,9 @@ internal class Night4 : INight
 
     private void At_3AM()
     {
-        AIManager.MangleAI?.SetDifficulty(12);
-        AIManager.W_FoxyAI?.SetDifficulty(3);
-        AIManager.BalloonBoyAI?.SetDifficulty(6);
+        AIManager.MangleAI?.Difficulty = 12;
+        AIManager.W_FoxyAI?.Difficulty = 3;
+        AIManager.BalloonBoyAI?.Difficulty = 6;
 
         AIManager.W_FreddyAI?.TryMoveNextPos();
         AIManager.BalloonBoyAI?.TryMoveNextPos();
@@ -157,18 +157,18 @@ internal class Night4 : INight
 
     private void At_4AM()
     {
-        AIManager.Toy_FreddyAI?.SetDifficulty(7);
-        AIManager.BalloonBoyAI?.SetDifficulty(3);
-        AIManager.PuppetAI?.SetDifficulty(7);
-        AIManager.W_FoxyAI?.SetDifficulty(6);
+        AIManager.Toy_FreddyAI?.Difficulty = 7;
+        AIManager.BalloonBoyAI?.Difficulty = 3;
+        AIManager.PuppetAI?.Difficulty = 7;
+        AIManager.W_FoxyAI?.Difficulty = 6;
 
         Utils.InvokeRandomAction(
-            () => AIManager.Toy_BonnieAI?.SetDifficulty(10),
-            () => AIManager.Toy_ChicaAI?.SetDifficulty(10)
+            () => AIManager.Toy_BonnieAI?.Difficulty = 10,
+            () => AIManager.Toy_ChicaAI?.Difficulty = 10
             );
         Utils.InvokeRandomAction(
-            () => AIManager.W_BonnieAI?.SetDifficulty(10),
-            () => AIManager.W_ChicaAI?.SetDifficulty(10)
+            () => AIManager.W_BonnieAI?.Difficulty = 10,
+            () => AIManager.W_ChicaAI?.Difficulty = 10
         );
 
         AIManager.BalloonBoyAI?.TryMoveNextPos();
@@ -176,11 +176,11 @@ internal class Night4 : INight
 
     private void At_5AM()
     {
-        AIManager.Toy_FreddyAI?.SetDifficulty(4);
-        AIManager.BalloonBoyAI?.SetDifficulty(0);
-        AIManager.PuppetAI?.SetDifficulty(6);
-        AIManager.W_FreddyAI?.SetDifficulty(6);
-        AIManager.W_FoxyAI?.SetDifficulty(0);
+        AIManager.Toy_FreddyAI?.Difficulty = 4;
+        AIManager.BalloonBoyAI?.Difficulty = 0;
+        AIManager.PuppetAI?.Difficulty = 6;
+        AIManager.W_FreddyAI?.Difficulty = 6;
+        AIManager.W_FoxyAI?.Difficulty = 0;
 
         var manglePose = AIManager.MangleAI?.GetPoseIndex();
         if (manglePose < 5 && manglePose != -1)

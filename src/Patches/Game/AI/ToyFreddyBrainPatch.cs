@@ -1,5 +1,6 @@
 ﻿using HarmonyLib;
 using NightmareMode.Managers;
+using NightmareMode.Modules.AI;
 
 namespace NightmareMode.Patches.Game.AI;
 
@@ -10,7 +11,7 @@ internal class ToyFreddyBrainPatch
     [HarmonyPrefix]
     private static bool Start_Prefix(ToyFreddyBrain __instance)
     {
-        AIManager.Toy_FreddyAI = __instance;
+        AIManager.Toy_FreddyAI = new ToyFreddyAIWrapper(__instance);
         __instance.StartTimer = 100f;
 
         if (!NightmarePlugin.ModEnabled) return true;

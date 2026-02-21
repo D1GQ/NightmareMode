@@ -1,13 +1,18 @@
-﻿using NightmareMode.Helpers;
-using NightmareMode.Items.Enums;
+﻿#pragma warning disable CS8602
+
+using NightmareMode.Enums;
+using NightmareMode.Helpers;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-#pragma warning disable CS8602
-
 namespace NightmareMode.Monos;
 
+/// <summary>
+/// Manages the UI elements for a single character in the Custom Night mode.
+/// Handles the display of character portraits, AI level controls, and button interactions
+/// for adjusting AI difficulty levels.
+/// </summary>
 internal sealed class CustomNightAIUI : MonoBehaviour
 {
     private bool hasSet;
@@ -20,6 +25,15 @@ internal sealed class CustomNightAIUI : MonoBehaviour
     private Action OnAIPlusButton = () => { };
     private Action OnAIMinusButton = () => { };
 
+    /// <summary>
+    /// Sets up the visual prefabs and initializes the UI components for the character.
+    /// Creates and positions the character portrait, name text, AI level text, and control buttons.
+    /// </summary>
+    /// <param name="characterImage">The raw image component template for the character portrait.</param>
+    /// <param name="characterImageOutline">The raw image component template for the portrait outline.</param>
+    /// <param name="aiPlusButton">The button template for increasing AI difficulty.</param>
+    /// <param name="aiMinusButton">The button template for decreasing AI difficulty.</param>
+    /// <param name="textTMP">The text template for displaying character name and AI level.</param>
     internal void SetPrefab(RawImage? characterImage, RawImage? characterImageOutline, Button? aiPlusButton, Button? aiMinusButton, TextMeshProUGUI? textTMP)
     {
         var characterPortrait = new GameObject("Portrait");
@@ -69,6 +83,13 @@ internal sealed class CustomNightAIUI : MonoBehaviour
         SetAILevelText("0");
     }
 
+    /// <summary>
+    /// Configures the UI element with specific character data.
+    /// Sets the character name, AI type, and portrait image.
+    /// </summary>
+    /// <param name="name">The display name of the character.</param>
+    /// <param name="ai">The AI type enum value for this character.</param>
+    /// <param name="characterPortrait">Optional sprite containing the character's portrait.</param>
     internal void Setup(string name, AITypes ai, Sprite? characterPortrait = null)
     {
         if (components.Any(c => c == null)) return;
@@ -82,6 +103,11 @@ internal sealed class CustomNightAIUI : MonoBehaviour
         gameObject.name = $"CustomNightAI({Enum.GetName(typeof(AITypes), AI)})";
     }
 
+    /// <summary>
+    /// Loads and crops the character portrait sprite to display in the UI.
+    /// Extracts the sprite region from the source texture and applies it to the RawImage.
+    /// </summary>
+    /// <param name="characterPortrait">The sprite containing the character portrait.</param>
     private void LoadImage(Sprite? characterPortrait)
     {
         if (characterPortrait != null)
@@ -112,6 +138,10 @@ internal sealed class CustomNightAIUI : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Initializes the plus and minus buttons with their click handlers.
+    /// Sets up the button click events to trigger the appropriate actions.
+    /// </summary>
     private void SetupButtons()
     {
         if (AIButtons.Count != 2) return;
@@ -122,6 +152,11 @@ internal sealed class CustomNightAIUI : MonoBehaviour
         AIButtons[1].onClick.AddListener(OnAIMinusButton.Invoke);
     }
 
+    /// <summary>
+    /// Enables or disables a specific AI control button and updates its visual state.
+    /// </summary>
+    /// <param name="active">True to enable the button, false to disable it.</param>
+    /// <param name="isPlusButton">True for the plus button, false for the minus button.</param>
     private void SetButtonActive(bool active, bool isPlusButton = true)
     {
         int b = isPlusButton ? 0 : 1;
@@ -130,6 +165,11 @@ internal sealed class CustomNightAIUI : MonoBehaviour
         button.GetComponentsInChildren<TextMeshProUGUI>().Last().color = active ? Color.white : new Color(0.1f, 0.1f, 0.1f);
     }
 
+    /// <summary>
+    /// Sets the action to be performed when an AI control button is clicked.
+    /// </summary>
+    /// <param name="action">The action to execute on button click.</param>
+    /// <param name="isPlusButton">True for the plus button, false for the minus button.</param>
     internal void SetButtonAction(Action action, bool isPlusButton = true)
     {
         if (isPlusButton)
@@ -142,6 +182,13 @@ internal sealed class CustomNightAIUI : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Updates the enabled state of the plus and minus buttons based on current AI level limits.
+    /// Disables buttons when the AI level has reached the minimum or maximum allowed value.
+    /// </summary>
+    /// <param name="min">The minimum allowed AI level.</param>
+    /// <param name="max">The maximum allowed AI level.</param>
+    /// <param name="cur">The current AI level.</param>
     internal void UpdateButtonState(int min, int max, int cur)
     {
         SetButtonActive(false);
@@ -156,5 +203,9 @@ internal sealed class CustomNightAIUI : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Updates the displayed AI level text.
+    /// </summary>
+    /// <param name="str">The string to display as the AI level (typically a number in parentheses).</param>
     internal void SetAILevelText(string str) => AILevelTMP?.SetText($"({str})");
 }

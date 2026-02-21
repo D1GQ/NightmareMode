@@ -1,6 +1,6 @@
-﻿using NightmareMode.Helpers;
-using NightmareMode.Items.Attributes;
-using NightmareMode.Items.Interfaces;
+﻿using NightmareMode.Attributes;
+using NightmareMode.Helpers;
+using NightmareMode.Interfaces;
 using NightmareMode.Managers;
 
 namespace NightmareMode.Nights;
@@ -36,7 +36,7 @@ internal class CustomNight : INight
     private void At_12AM()
     {
         Utils.SetStartTimeAllRandom(0f, 10f);
-        AIManager.PuppetAI?.SetStartTime(0f);
+        AIManager.PuppetAI?.StartTimer = 0f;
 
         foreach (var kvp in CustomNightManager.AILevels)
         {

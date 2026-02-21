@@ -1,7 +1,7 @@
-﻿using NightmareMode.Data;
+﻿using NightmareMode.Attributes;
+using NightmareMode.Data;
+using NightmareMode.Enums;
 using NightmareMode.Helpers;
-using NightmareMode.Items.Attributes;
-using NightmareMode.Items.Enums;
 using NightmareMode.Managers;
 using NightmareMode.Modules;
 using TMPro;
@@ -11,6 +11,10 @@ using UnityEngine.UI;
 
 namespace NightmareMode.Monos;
 
+/// <summary>
+/// Manages the UI for individual night selection screens in the game.
+/// Handles display, navigation, locking/unlocking, and loading of regular nights, challenge nights, and custom nights.
+/// </summary>
 internal sealed class NightUI : MonoBehaviour
 {
     private static GameObject? _nightPrefab;
@@ -28,16 +32,33 @@ internal sealed class NightUI : MonoBehaviour
     private RawImage? _rawImage;
     private GameObject? _customNightContainer;
 
+    /// <summary>
+    /// Resets the collection of all night UI instances.
+    /// Called when reloading the night selection screen.
+    /// </summary>
     internal static void Reset()
     {
         _allNights.Clear();
     }
 
+    /// <summary>
+    /// Sets the prefab to be used for creating night UI elements.
+    /// </summary>
+    /// <param name="nightPrefab">The prefab GameObject to instantiate for each night.</param>
     internal static void SetNightPrefab(GameObject nightPrefab)
     {
         _nightPrefab = nightPrefab;
     }
 
+    /// <summary>
+    /// Creates a new night UI element.
+    /// </summary>
+    /// <param name="title">The display title for the night.</param>
+    /// <param name="nightOrChallenge">The night number or challenge ID.</param>
+    /// <param name="requiredNight">The night that must be completed to unlock this night.</param>
+    /// <param name="nightType">The type of night (Normal, Challenge, or Custom).</param>
+    /// <param name="sprite">Optional sprite to display for the night.</param>
+    /// <returns>The created NightUI component, or null if creation failed.</returns>
     internal static NightUI? Create(string title, int nightOrChallenge, NightsFlag requiredNight, NightType nightType, Sprite? sprite = null)
     {
         if (_nightPrefab == null) return null;
@@ -61,6 +82,14 @@ internal sealed class NightUI : MonoBehaviour
         return nightUI;
     }
 
+    /// <summary>
+    /// Initializes the night UI with the specified parameters.
+    /// </summary>
+    /// <param name="title">The display title for the night.</param>
+    /// <param name="nightOrChallenge">The night number or challenge ID.</param>
+    /// <param name="requiredNight">The night that must be completed to unlock this night.</param>
+    /// <param name="nightType">The type of night.</param>
+    /// <param name="sprite">Optional sprite to display.</param>
     private void Initialize(string title, int nightOrChallenge, NightsFlag requiredNight, NightType nightType, Sprite? sprite)
     {
         _title = title;
@@ -76,6 +105,10 @@ internal sealed class NightUI : MonoBehaviour
         LockIfRequired();
     }
 
+    /// <summary>
+    /// Sets up the title text element for the night.
+    /// Creates a new title text element from the template.
+    /// </summary>
     private void SetupTitle()
     {
         var text = transform.Find("Text (TMP) (1)")?.GetComponent<TextMeshProUGUI>();
@@ -91,6 +124,10 @@ internal sealed class NightUI : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Sets up the completed text indicator and night number display.
+    /// Shows "(Completed)" if the night or challenge has been completed.
+    /// </summary>
     private void SetupCompletedText()
     {
         var text = transform.Find("Text (TMP) (1)")?.GetComponent<TextMeshProUGUI>();
@@ -132,6 +169,10 @@ internal sealed class NightUI : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Sets up the play button and its click handler.
+    /// When clicked, hides the night UI, shows loading tips, and loads the appropriate night or challenge.
+    /// </summary>
     private void SetupPlayButton()
     {
         var play = transform.Find("Play (1)");
@@ -153,6 +194,11 @@ internal sealed class NightUI : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Sets up the visual elements of the night UI.
+    /// Configures sprites, raw images, and visibility of various child elements.
+    /// Handles special setup for custom nights.
+    /// </summary>
     private void SetupVisuals()
     {
         if (_nightType == NightType.Challenge)
@@ -207,10 +253,14 @@ internal sealed class NightUI : MonoBehaviour
             if (rawImage1 != null) Destroy(rawImage1.gameObject);
             if (rawImage2 != null) Destroy(rawImage2.gameObject);
 
-            CustomNightManager.LoadMenu(this);
+            CustomNightManager.LoadCustomNightMenu(this);
         }
     }
 
+    /// <summary>
+    /// Locks or unlocks the night based on completion requirements.
+    /// Shows/hides the locked overlay and play button accordingly.
+    /// </summary>
     internal void LockIfRequired()
     {
         if (_requiredNight != NightsFlag.None && !DataManager.CompletedNights.HasCompletedNight(_requiredNight) && !_allNightsUnlocked)
@@ -247,6 +297,11 @@ internal sealed class NightUI : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Sets up the navigation buttons (Back/Forward) for cycling through nights.
+    /// Creates a circular navigation system where the last night connects back to the first.
+    /// </summary>
+    /// <param name="nightObj">The night GameObject to set up navigation for.</param>
     private static void SetupNavigation(GameObject nightObj)
     {
         if (nightObj == null) return;
@@ -303,6 +358,10 @@ internal sealed class NightUI : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Gets the unlock tip text to display when a night is locked.
+    /// </summary>
+    /// <returns>A localized string explaining how to unlock this night.</returns>
     private string GetUnlockTip()
     {
         switch (_nightType)
@@ -314,6 +373,10 @@ internal sealed class NightUI : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Loads a regular night by its number.
+    /// </summary>
+    /// <param name="night">The night number to load (1-6).</param>
     internal static void LoadNight(int night)
     {
         if (night == 1)
@@ -330,6 +393,10 @@ internal sealed class NightUI : MonoBehaviour
         SceneManager.LoadScene("Nights");
     }
 
+    /// <summary>
+    /// Loads a challenge night by its ID.
+    /// </summary>
+    /// <param name="challengeId">The challenge ID to load.</param>
     internal static void LoadChallenge(int challengeId)
     {
         NightManager.IsChallengeNight = true;
@@ -339,6 +406,9 @@ internal sealed class NightUI : MonoBehaviour
         SceneManager.LoadScene("Nights");
     }
 
+    /// <summary>
+    /// Unlocks all nights regardless of completion requirements.
+    /// </summary>
     internal static void UnloadAllNights()
     {
         if (_allNightsUnlocked) return;

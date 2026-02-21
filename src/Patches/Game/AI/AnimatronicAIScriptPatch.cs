@@ -1,6 +1,7 @@
 ﻿using HarmonyLib;
-using NightmareMode.Items.Enums;
+using NightmareMode.Enums;
 using NightmareMode.Managers;
+using NightmareMode.Modules.AI;
 
 namespace NightmareMode.Patches.Game.AI;
 
@@ -15,37 +16,38 @@ internal class AnimatronicAIScriptPatch
         {
             case nameof(AITypes.BonnieAI):
                 {
-                    AIManager.Toy_BonnieAI = __instance;
+                    AIManager.Toy_BonnieAI = new AnimatronicAIWrapper(__instance);
                 }
                 break;
             case nameof(AITypes.ChicaAI):
                 {
-                    AIManager.Toy_ChicaAI = __instance;
+                    AIManager.Toy_ChicaAI = new AnimatronicAIWrapper(__instance);
                 }
                 break;
             case nameof(AITypes.MangleAI):
                 {
-                    AIManager.MangleAI = __instance;
+                    AIManager.MangleAI = new AnimatronicAIWrapper(__instance);
                 }
                 break;
             case nameof(AITypes.WFreddyAI):
                 {
-                    AIManager.W_FreddyAI = __instance;
+                    AIManager.W_FreddyAI = new AnimatronicAIWrapper(__instance);
                 }
                 break;
             case nameof(AITypes.WBonnieAI):
                 {
-                    AIManager.W_BonnieAI = __instance;
+                    AIManager.W_BonnieAI = new AnimatronicAIWrapper(__instance);
                 }
                 break;
             case nameof(AITypes.WChicaAI):
                 {
-                    AIManager.W_ChicaAI = __instance;
+                    AIManager.W_ChicaAI = new AnimatronicAIWrapper(__instance);
                 }
                 break;
         }
 
         if (!NightmarePlugin.ModEnabled) return true;
+
         return false;
     }
 }

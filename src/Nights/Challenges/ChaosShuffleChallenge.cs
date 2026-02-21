@@ -1,8 +1,8 @@
-﻿using NightmareMode.Data;
+﻿using NightmareMode.Attributes;
+using NightmareMode.Data;
+using NightmareMode.Enums;
 using NightmareMode.Helpers;
-using NightmareMode.Items.Attributes;
-using NightmareMode.Items.Enums;
-using NightmareMode.Items.Interfaces;
+using NightmareMode.Interfaces;
 using NightmareMode.Managers;
 using NightmareMode.Modules;
 
@@ -42,7 +42,7 @@ internal class ChaosShuffleChallenge : IChallenge
     private void At_12AM()
     {
         Utils.SetStartTimeAllRandom(0f, 30f);
-        AIManager.PuppetAI?.SetStartTime(0f);
+        AIManager.PuppetAI?.StartTimer = 0f;
 
         RandomAI();
     }
@@ -55,7 +55,7 @@ internal class ChaosShuffleChallenge : IChallenge
     private void RandomAI()
     {
         Utils.SetDifficultyAllRandom(1, 20);
-        AIManager.PuppetAI?.SetDifficulty(10);
+        AIManager.PuppetAI?.Difficulty = 10;
 
         NightManager.PowerSurgeOut();
     }

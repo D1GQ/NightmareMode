@@ -4,12 +4,20 @@ using UnityEngine;
 
 namespace NightmareMode.Monos;
 
+/// <summary>
+/// Automatically translates UI text elements based on the current game language.
+/// Handles both TextMeshProUGUI and TextMeshPro components.
+/// </summary>
 internal sealed class GUIAutoTranslator : MonoBehaviour
 {
     private bool _setup;
     private string _originalText = string.Empty;
     private event Action<string>? setText;
 
+    /// <summary>
+    /// Sets up the translator for a TextMeshProUGUI component.
+    /// </summary>
+    /// <param name="textMeshProUGUI">The TextMeshProUGUI component to translate.</param>
     internal void Setup(TextMeshProUGUI? textMeshProUGUI)
     {
         if (textMeshProUGUI == null) return;
@@ -26,6 +34,10 @@ internal sealed class GUIAutoTranslator : MonoBehaviour
         UpdateText();
     }
 
+    /// <summary>
+    /// Sets up the translator for a TextMeshPro component.
+    /// </summary>
+    /// <param name="textMeshPro">The TextMeshPro component to translate.</param>
     internal void Setup(TextMeshPro? textMeshPro)
     {
         if (textMeshPro == null) return;
@@ -42,6 +54,9 @@ internal sealed class GUIAutoTranslator : MonoBehaviour
         UpdateText();
     }
 
+    /// <summary>
+    /// Updates the text with the translated version based on the current language.
+    /// </summary>
     private void UpdateText()
     {
         string key = GetKey();
@@ -51,6 +66,11 @@ internal sealed class GUIAutoTranslator : MonoBehaviour
         setText?.Invoke(translation);
     }
 
+    /// <summary>
+    /// Gets the appropriate font asset based on the system language.
+    /// </summary>
+    /// <param name="defaultFont">The default font to use if no language-specific font is found.</param>
+    /// <returns>The language-specific font asset or the default font.</returns>
     private TMP_FontAsset GetFont(TMP_FontAsset defaultFont)
     {
         return Application.systemLanguage switch
@@ -60,12 +80,21 @@ internal sealed class GUIAutoTranslator : MonoBehaviour
         };
     }
 
+    /// <summary>
+    /// Finds a font asset by its name.
+    /// </summary>
+    /// <param name="fontName">The name of the font to find.</param>
+    /// <returns>The font asset if found, otherwise null.</returns>
     private TMP_FontAsset GetFontByName(string fontName)
     {
         return Resources.FindObjectsOfTypeAll<TMP_FontAsset>()
             .FirstOrDefault(f => f.name == fontName);
     }
 
+    /// <summary>
+    /// Gets the translation key for the original text.
+    /// </summary>
+    /// <returns>The translation key if found, otherwise an empty string.</returns>
     private string GetKey()
     {
         return _originalText switch
@@ -79,12 +108,14 @@ internal sealed class GUIAutoTranslator : MonoBehaviour
             "ENTER PICTURE CODE" => "Text.Enter_Picture_Code",
             "Activate Code" => "Text.Activate_Code",
             "LOCKED!" => "Text.Locked",
+
             // Graphics Settings menu
             "Graphics Settings" => "Text.Graphics_Settings",
             "Low" => "Text.Graphics_Low",
             "Medium" => "Text.Graphics_Medium",
             "High" => "Text.Graphics_High",
             "Ultra" => "Text.Graphics_Ultra",
+
             // Audio Settings menu
             "Audio" => "Text.Audio",
             "MASTER VOLUME" => "Text.Master_Volume",
@@ -94,6 +125,7 @@ internal sealed class GUIAutoTranslator : MonoBehaviour
             "MINIGAME VOLUME" => "Text.Minigame_Volume",
             "PHONE GUY VOLUME" => "Text.Phoneguy_Volume",
             "CLOSE" => "Text.Close",
+
             // UI
             "ENTER" => "Text.Enter",
             "RETURN" => "Text.Return",
@@ -103,6 +135,7 @@ internal sealed class GUIAutoTranslator : MonoBehaviour
             "The Mangle will leave your office after lowering its head twice" => "Text.Loading.Tip3",
             "Gen 2 Freddy will laugh if he is about to mess with a breaker box" => "Text.Loading.Tip4",
             "You cannot spam the camera flashlight, stop trying..." => "Text.Loading.Tip5",
+
             // Log Book
             "Notes:" => "Text.Notes",
             "WEEK 1" => "Text.Week1",
@@ -112,6 +145,7 @@ internal sealed class GUIAutoTranslator : MonoBehaviour
             "THURSDAY" => "Text.Thursday",
             "FRIDAY" => "Text.Friday",
             "SATURDAY" => "Text.Saturday",
+
             _ => string.Empty,
         };
     }

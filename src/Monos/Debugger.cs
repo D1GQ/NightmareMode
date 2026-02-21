@@ -1,11 +1,14 @@
-﻿using NightmareMode.Helpers;
-using NightmareMode.Managers;
+﻿using NightmareMode.Managers;
 using NightmareMode.Modules;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 namespace NightmareMode.Monos;
 
+/// <summary>
+/// Debugging utility singleton that provides runtime information and cheat functionality.
+/// Displays AI status, night information, and enables debug controls when in DEBUG mode.
+/// </summary>
 internal sealed class Debugger : MonoSingleton<Debugger>
 {
     private bool _showNightInfo;
@@ -108,9 +111,9 @@ internal sealed class Debugger : MonoSingleton<Debugger>
 
                 if (AIManager.BalloonBoyAI?.Difficulty > 0)
                 {
-                    string ventInfo = $"Waiting={(int)AIManager.BalloonBoyAI.Timer}";
-                    BBVentScript? BBVent = AIManager.BalloonBoyAI.BB1.Active ? AIManager.BalloonBoyAI.BB1 : null;
-                    BBVent ??= AIManager.BalloonBoyAI.BB2.Active ? AIManager.BalloonBoyAI.BB2 : null;
+                    string ventInfo = $"Waiting={(int)AIManager.BalloonBoyAI.AI.Timer}";
+                    BBVentScript? BBVent = AIManager.BalloonBoyAI.AI.BB1.Active ? AIManager.BalloonBoyAI.AI.BB1 : null;
+                    BBVent ??= AIManager.BalloonBoyAI.AI.BB2.Active ? AIManager.BalloonBoyAI.AI.BB2 : null;
                     if (BBVent != null)
                     {
                         ventInfo = $"Vent={(int)BBVent.timer}, Prog={BBVent.prog}";
@@ -119,9 +122,9 @@ internal sealed class Debugger : MonoSingleton<Debugger>
                     textInfo += $"BB: AI={AIManager.BalloonBoyAI?.Difficulty}, {ventInfo}\n";
                 }
 
-                if (AIManager.PuppetAI?.dif > 0 && AIManager.PuppetAI.start <= 0f)
+                if (AIManager.PuppetAI?.Difficulty > 0 && AIManager.PuppetAI.StartTimer <= 0f)
                 {
-                    textInfo += $"Puppet: AI={AIManager.PuppetAI?.dif ?? 0}, Time={(int)(AIManager.PuppetAI?.timer ?? 0f)}\n";
+                    textInfo += $"Puppet: AI={AIManager.PuppetAI?.Difficulty ?? 0}, Time={(int)(AIManager.PuppetAI?.StartTimer ?? 0f)}\n";
                 }
 
                 if (AIManager.W_FreddyAI?.Difficulty > 0)

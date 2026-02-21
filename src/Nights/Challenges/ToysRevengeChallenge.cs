@@ -1,8 +1,8 @@
-﻿using NightmareMode.Data;
+﻿using NightmareMode.Attributes;
+using NightmareMode.Data;
+using NightmareMode.Enums;
 using NightmareMode.Helpers;
-using NightmareMode.Items.Attributes;
-using NightmareMode.Items.Enums;
-using NightmareMode.Items.Interfaces;
+using NightmareMode.Interfaces;
 using NightmareMode.Managers;
 using NightmareMode.Modules;
 using UnityEngine;
@@ -36,25 +36,25 @@ internal class ToysRevengeChallenge : IChallenge
     private void At_12AM()
     {
         Utils.SetStartTimeAllRandom(0f, 10f);
-        AIManager.PuppetAI?.SetStartTime(0f);
+        AIManager.PuppetAI?.StartTimer = 0f;
 
         Utils.SetDifficultyAll(0);
-        AIManager.Toy_FreddyAI?.SetDifficulty(20);
-        AIManager.Toy_BonnieAI?.SetDifficulty(35);
-        AIManager.Toy_ChicaAI?.SetDifficulty(35);
-        AIManager.PuppetAI?.SetDifficulty(12);
-        AIManager.MangleAI?.SetDifficulty(50);
+        AIManager.Toy_FreddyAI?.Difficulty = 20;
+        AIManager.Toy_BonnieAI?.Difficulty = 35;
+        AIManager.Toy_ChicaAI?.Difficulty = 35;
+        AIManager.PuppetAI?.Difficulty = 12;
+        AIManager.MangleAI?.Difficulty = 50;
 
-        var bbAudioSource = AIManager.BalloonBoyAI?.OfficeBB?.GetComponentInChildren<AudioSource>(true);
+        var bbAudioSource = AIManager.BalloonBoyAI?.AI?.OfficeBB?.GetComponentInChildren<AudioSource>(true);
         if (bbAudioSource != null)
         {
             bbAudioSource.pitch = 0.8f;
             bbAudioSource.volume = 0.2f;
             bbAudioSource.reverbZoneMix = 1.1f;
         }
-        AIManager.BalloonBoyAI?.BBOFFICE();
+        AIManager.BalloonBoyAI?.AI?.BBOFFICE();
         CatchedSingleton<MouseFollowScript>.Instance.FrontLight.disabled = true;
-        AIManager.BalloonBoyAI?.OfficeBB?.SetLocalSpace(new Vector3(0.2468f, 0.33f, 4.4938f), null, Quaternion.Euler(0.3128f, 79.3757f, 0f));
+        AIManager.BalloonBoyAI?.AI?.OfficeBB?.SetLocalSpace(new Vector3(0.2468f, 0.33f, 4.4938f), null, Quaternion.Euler(0.3128f, 79.3757f, 0f));
 
         NightManager.DelayedNightAction(() =>
         {

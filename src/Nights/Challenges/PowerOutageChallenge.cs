@@ -1,8 +1,8 @@
-﻿using NightmareMode.Data;
+﻿using NightmareMode.Attributes;
+using NightmareMode.Data;
+using NightmareMode.Enums;
 using NightmareMode.Helpers;
-using NightmareMode.Items.Attributes;
-using NightmareMode.Items.Enums;
-using NightmareMode.Items.Interfaces;
+using NightmareMode.Interfaces;
 using NightmareMode.Managers;
 using NightmareMode.Modules;
 
@@ -56,66 +56,66 @@ internal class PowerOutageChallenge : IChallenge
 
         OutBreakers();
 
-        AIManager.W_BonnieAI?.GetActivePose()?.AddPoseTimer(10f);
-        AIManager.W_ChicaAI?.GetActivePose()?.AddPoseTimer(10f);
+        AIManager.W_BonnieAI?.GetActivePose()?.Timer += 10f;
+        AIManager.W_ChicaAI?.GetActivePose()?.Timer += 10f;
     }
 
     private void At_12AM()
     {
         Utils.SetStartTimeAllRandom(0f, 10f);
-        AIManager.PuppetAI?.SetStartTime(0f);
+        AIManager.PuppetAI?.StartTimer = 0f;
 
         Utils.SetDifficultyAll(0);
-        AIManager.BalloonBoyAI?.SetDifficulty(4);
-        AIManager.PuppetAI?.SetDifficulty(8);
-        AIManager.W_FreddyAI?.SetDifficulty(4);
-        AIManager.W_BonnieAI?.SetDifficulty(6);
-        AIManager.W_ChicaAI?.SetDifficulty(6);
-        AIManager.W_FoxyAI?.SetDifficulty(8);
+        AIManager.BalloonBoyAI?.Difficulty = 4;
+        AIManager.PuppetAI?.Difficulty = 8;
+        AIManager.W_FreddyAI?.Difficulty = 4;
+        AIManager.W_BonnieAI?.Difficulty = 6;
+        AIManager.W_ChicaAI?.Difficulty = 6;
+        AIManager.W_FoxyAI?.Difficulty = 8;
     }
 
     private void At_1AM()
     {
-        AIManager.W_FreddyAI?.SetDifficulty(6);
+        AIManager.W_FreddyAI?.Difficulty = 6;
         Utils.InvokeRandomAction(() =>
         {
-            AIManager.W_BonnieAI?.SetDifficulty(8);
-            AIManager.W_ChicaAI?.SetDifficulty(4);
+            AIManager.W_BonnieAI?.Difficulty = 8;
+            AIManager.W_ChicaAI?.Difficulty = 4;
         }, () =>
         {
-            AIManager.W_BonnieAI?.SetDifficulty(4);
-            AIManager.W_ChicaAI?.SetDifficulty(8);
+            AIManager.W_BonnieAI?.Difficulty = 4;
+            AIManager.W_ChicaAI?.Difficulty = 8;
         });
     }
 
     private void At_2AM()
     {
-        AIManager.W_FreddyAI?.SetDifficulty(2);
-        AIManager.W_BonnieAI?.SetDifficulty(7);
-        AIManager.W_ChicaAI?.SetDifficulty(7);
+        AIManager.W_FreddyAI?.Difficulty = 2;
+        AIManager.W_BonnieAI?.Difficulty = 7;
+        AIManager.W_ChicaAI?.Difficulty = 7;
     }
 
     private void At_3AM()
     {
-        AIManager.W_FreddyAI?.SetDifficulty(6);
-        AIManager.W_BonnieAI?.SetDifficulty(4);
-        AIManager.W_ChicaAI?.SetDifficulty(4);
+        AIManager.W_FreddyAI?.Difficulty = 6;
+        AIManager.W_BonnieAI?.Difficulty = 4;
+        AIManager.W_ChicaAI?.Difficulty = 4;
     }
     private void At_4AM() { }
 
     private void At_5AM()
     {
-        AIManager.W_FreddyAI?.SetDifficulty(6);
-        AIManager.W_BonnieAI?.SetDifficulty(6);
-        AIManager.W_ChicaAI?.SetDifficulty(6);
+        AIManager.W_FreddyAI?.Difficulty = 6;
+        AIManager.W_BonnieAI?.Difficulty = 6;
+        AIManager.W_ChicaAI?.Difficulty = 6;
     }
 
     private void OutBreakers()
     {
-        BreakerRandomSwitches(AIManager.Toy_FreddyAI?.choice1?.Breaker);
-        BreakerRandomSwitches(AIManager.Toy_FreddyAI?.choice2?.Breaker);
-        BreakerRandomSwitches(AIManager.Toy_FreddyAI?.choice3?.Breaker);
-        BreakerRandomSwitches(AIManager.Toy_FreddyAI?.choice4?.Breaker);
+        BreakerRandomSwitches(AIManager.Toy_FreddyAI?.AI?.choice1?.Breaker);
+        BreakerRandomSwitches(AIManager.Toy_FreddyAI?.AI?.choice2?.Breaker);
+        BreakerRandomSwitches(AIManager.Toy_FreddyAI?.AI?.choice3?.Breaker);
+        BreakerRandomSwitches(AIManager.Toy_FreddyAI?.AI?.choice4?.Breaker);
     }
 
     private void BreakerRandomSwitches(BreakerScript? breaker)

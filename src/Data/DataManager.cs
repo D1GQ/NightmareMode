@@ -1,4 +1,4 @@
-﻿using NightmareMode.Items.Enums;
+﻿using NightmareMode.Enums;
 using System.Globalization;
 using System.IO.Compression;
 using System.Text;

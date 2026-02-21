@@ -2,15 +2,34 @@
 
 namespace NightmareMode.Monos;
 
+/// <summary>
+/// Applies glitch effects to an AudioSource, creating distortion and instability in audio playback.
+/// Can simulate audio corruption through volume fluctuations, pitch variations, and dramatic pitch drops.
+/// </summary>
 internal sealed class AudioSourceGlitch : MonoBehaviour
 {
     private AudioSource? audioSource;
     private float baseVolume;
     private float basePitch;
 
+    /// <summary>
+    /// Intensity of volume glitching effects. Higher values create more dramatic volume fluctuations.
+    /// </summary>
     internal float volumeGlitchIntensity = 0.3f;
+
+    /// <summary>
+    /// Intensity of pitch glitching effects. Higher values create more dramatic pitch variations.
+    /// </summary>
     internal float pitchGlitchIntensity = 0.5f;
+
+    /// <summary>
+    /// Speed at which glitch patterns evolve. Higher values create faster, more erratic glitching.
+    /// </summary>
     internal float glitchSpeed = 5f;
+
+    /// <summary>
+    /// Chance (0-1) of an extreme glitch occurring that doubles the pitch variation intensity.
+    /// </summary>
     internal float extremeGlitchChance = 0.1f;
 
     private float pitchDropSpeed = 0.5f;
@@ -19,10 +38,18 @@ internal sealed class AudioSourceGlitch : MonoBehaviour
     private float[] offsets = new float[3];
     private float[] speeds = new float[3];
 
+    /// <summary>
+    /// Controls whether glitch effects are currently active.
+    /// </summary>
     internal bool doGlitch = true;
+
     private bool isPitchDropping = false;
     private bool audioDisabledAfterDrop = false;
 
+    /// <summary>
+    /// Initializes the glitch component by finding the AudioSource and setting up glitch patterns.
+    /// Destroys itself if the GameObject doesn't have exactly one AudioSource component.
+    /// </summary>
     private void Start()
     {
         var audios = GetComponentsInChildren<AudioSource>(true);
@@ -40,6 +67,10 @@ internal sealed class AudioSourceGlitch : MonoBehaviour
         InitializeGlitchPatterns();
     }
 
+    /// <summary>
+    /// Initializes random offsets and speeds for the three glitch waveforms.
+    /// Each waveform operates at slightly different speeds to create complex interference patterns.
+    /// </summary>
     private void InitializeGlitchPatterns()
     {
         for (int i = 0; i < 3; i++)
@@ -49,6 +80,9 @@ internal sealed class AudioSourceGlitch : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Updates glitch effects each frame. Handles normal glitching or pitch drop sequences.
+    /// </summary>
     private void Update()
     {
         if (audioSource == null) return;
@@ -64,6 +98,10 @@ internal sealed class AudioSourceGlitch : MonoBehaviour
         ApplyGlitchEffects();
     }
 
+    /// <summary>
+    /// Applies real-time glitch effects to volume and pitch using combined sine waves.
+    /// Creates natural-sounding audio corruption through waveform interference.
+    /// </summary>
     private void ApplyGlitchEffects()
     {
         if (audioSource == null) return;
@@ -91,6 +129,10 @@ internal sealed class AudioSourceGlitch : MonoBehaviour
         audioSource.pitch = basePitch * Mathf.Clamp(1f + pitchMod * pitchGlitchIntensity * pitchMultiplier, 0.1f, 3f);
     }
 
+    /// <summary>
+    /// Handles the pitch drop sequence, gradually lowering pitch to the target value
+    /// and disabling the audio source once the target is reached.
+    /// </summary>
     private void HandlePitchDrop()
     {
         if (audioSource == null) return;
@@ -111,6 +153,10 @@ internal sealed class AudioSourceGlitch : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Triggers a dramatic pitch drop effect that gradually lowers the audio pitch to zero,
+    /// then disables the audio source. Useful for simulating audio system failure.
+    /// </summary>
     internal void TriggerPitchDropAndDisable()
     {
         if (audioSource != null && !isPitchDropping)
@@ -120,6 +166,10 @@ internal sealed class AudioSourceGlitch : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Resets the audio source to its base state, restoring normal volume and pitch,
+    /// and ending any active pitch drop sequences.
+    /// </summary>
     internal void ResetAudioSource()
     {
         if (audioSource == null) return;

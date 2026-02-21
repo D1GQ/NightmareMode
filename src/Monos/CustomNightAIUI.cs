@@ -96,6 +96,7 @@ internal sealed class CustomNightAIUI : MonoBehaviour
 
         if (hasSet) return;
         hasSet = true;
+        NameTMP.font = GUIAutoTranslator.GetFont(NameTMP.font);
         NameTMP.SetText(name);
         AI = ai;
         LoadImage(characterPortrait);

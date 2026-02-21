@@ -38,6 +38,9 @@ internal class NightmarePlugin : BaseUnityPlugin
         Translator.Initialize();
         DataManager.LoadSettings();
         InstanceAttribute.RegisterAll();
+
+        ModManager.Create();
+        Debugger.Create();
     }
 
     private bool _hasLateLoad;
@@ -45,9 +48,6 @@ internal class NightmarePlugin : BaseUnityPlugin
     {
         if (_hasLateLoad) return;
         _hasLateLoad = true;
-
-        ModManager.Create();
-        Debugger.Create();
     }
 
     internal static ConfigEntry<int>? CustomNightMaxAILevelAll { get; private set; }

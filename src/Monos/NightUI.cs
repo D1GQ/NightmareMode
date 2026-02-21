@@ -116,6 +116,7 @@ internal sealed class NightUI : MonoBehaviour
         {
             var titleTMP = Instantiate(text, transform);
             titleTMP.name = "title";
+            titleTMP.font = GUIAutoTranslator.GetFont(titleTMP.font);
             titleTMP.fontSize = 10;
             titleTMP.SetText(_title);
             titleTMP.enableWordWrapping = false;
@@ -145,6 +146,7 @@ internal sealed class NightUI : MonoBehaviour
         var nightNum = transform.Find("Text (TMP) (1)")?.GetComponentInChildren<TextMeshProUGUI>(true);
         if (nightNum != null)
         {
+            nightNum.font = GUIAutoTranslator.GetFont(nightNum.font);
             if (_nightType != NightType.Challenge)
             {
                 nightNum.SetText($"({Translator.Get("Night")} {_nightOrChallenge})");
@@ -153,6 +155,7 @@ internal sealed class NightUI : MonoBehaviour
                 var inight = RegisterNightAttribute.GetClassInstance(c => c.Night == _nightOrChallenge);
                 if (inight != null && DataManager.CompletedNights.HasCompletedNight(inight.Night.ToNightFlag()))
                 {
+                    _completedText?.font = GUIAutoTranslator.GetFont(_completedText.font);
                     _completedText?.SetText($"<#00FF20>({Translator.Get("Night.Completed")})</color>");
                 }
             }
@@ -163,6 +166,7 @@ internal sealed class NightUI : MonoBehaviour
 
                 if (RegisterChallengeAttribute.GetClassInstance(c => c.ChallengeId == _nightOrChallenge)?.Completed == true)
                 {
+                    _completedText?.font = GUIAutoTranslator.GetFont(_completedText.font);
                     _completedText?.SetText($"<#00FF20>({Translator.Get("Night.Completed")})</color>");
                 }
             }

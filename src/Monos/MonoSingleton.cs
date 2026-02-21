@@ -52,6 +52,7 @@ internal abstract class MonoSingleton<T> : MonoBehaviour where T : MonoSingleton
 
         if (dontDestroy)
         {
+            obj.hideFlags = HideFlags.HideAndDontSave;
             DontDestroyOnLoad(obj);
         }
     }

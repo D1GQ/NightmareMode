@@ -1,4 +1,5 @@
-﻿using NightmareMode.Modules;
+﻿using NightmareMode.Managers;
+using NightmareMode.Modules;
 using TMPro;
 using UnityEngine;
 
@@ -13,6 +14,7 @@ internal sealed class GUIAutoTranslator : MonoBehaviour
     private bool _setup;
     private string _originalText = string.Empty;
     private event Action<string>? setText;
+    private event Action? setFont;
 
     /// <summary>
     /// Sets up the translator for a TextMeshProUGUI component.
@@ -28,8 +30,12 @@ internal sealed class GUIAutoTranslator : MonoBehaviour
         setText = (text) =>
         {
             textMeshProUGUI.SetText(text);
+            textMeshProUGUI.enableWordWrapping = false;
         };
-        textMeshProUGUI.font = GetFont(textMeshProUGUI.font);
+        setFont = () =>
+        {
+            textMeshProUGUI.font = GetFont(textMeshProUGUI.font);
+        };
 
         UpdateText();
     }
@@ -48,8 +54,12 @@ internal sealed class GUIAutoTranslator : MonoBehaviour
         setText = (text) =>
         {
             textMeshPro.SetText(text);
+            textMeshPro.enableWordWrapping = false;
         };
-        textMeshPro.font = GetFont(textMeshPro.font);
+        setFont = () =>
+        {
+            textMeshPro.font = GetFont(textMeshPro.font);
+        };
 
         UpdateText();
     }
@@ -64,6 +74,7 @@ internal sealed class GUIAutoTranslator : MonoBehaviour
 
         string translation = Translator.Get(key);
         setText?.Invoke(translation);
+        setFont?.Invoke();
     }
 
     /// <summary>
@@ -71,24 +82,16 @@ internal sealed class GUIAutoTranslator : MonoBehaviour
     /// </summary>
     /// <param name="defaultFont">The default font to use if no language-specific font is found.</param>
     /// <returns>The language-specific font asset or the default font.</returns>
-    private TMP_FontAsset GetFont(TMP_FontAsset defaultFont)
+    internal static TMP_FontAsset GetFont(TMP_FontAsset defaultFont)
     {
-        return Application.systemLanguage switch
+        return Translator.CurrentLanguage switch
         {
-            SystemLanguage.Korean => GetFontByName("NanumBrushScript-Regular SDF"),
+            SystemLanguage.ChineseSimplified => ModManager.Instance.NotoSans_SC ?? defaultFont,
+            SystemLanguage.Japanese => ModManager.Instance.NotoSans_JP ?? defaultFont,
+            SystemLanguage.Korean => ModManager.Instance.NotoSans_KR ?? defaultFont,
+            SystemLanguage.Russian => ModManager.Instance.NotoSans ?? defaultFont,
             _ => defaultFont,
         };
-    }
-
-    /// <summary>
-    /// Finds a font asset by its name.
-    /// </summary>
-    /// <param name="fontName">The name of the font to find.</param>
-    /// <returns>The font asset if found, otherwise null.</returns>
-    private TMP_FontAsset GetFontByName(string fontName)
-    {
-        return Resources.FindObjectsOfTypeAll<TMP_FontAsset>()
-            .FirstOrDefault(f => f.name == fontName);
     }
 
     /// <summary>
@@ -117,7 +120,7 @@ internal sealed class GUIAutoTranslator : MonoBehaviour
             "Ultra" => "Text.Graphics_Ultra",
 
             // Audio Settings menu
-            "Audio" => "Text.Audio",
+            "Audio Settings" => "Text.Audio_Settings",
             "MASTER VOLUME" => "Text.Master_Volume",
             "SFX VOLUME" => "Text.SFX_Volume",
             "AMBIENCE VOLUME" => "Text.Ambience_Volume",

@@ -62,6 +62,8 @@ internal static class CustomNightManager
         var types = Enum.GetValues(typeof(AITypes));
         foreach (AITypes ai in types)
         {
+            if (ai == AITypes.None) continue;
+
             if (!AILevels.ContainsKey(ai))
             {
                 AILevels[ai] = 0;

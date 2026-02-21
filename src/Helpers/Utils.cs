@@ -1,10 +1,9 @@
 ﻿using NightmareMode.Enums;
 using NightmareMode.Managers;
 using NightmareMode.Modules;
+using NightmareMode.Monos;
 using System.Collections;
 using System.Reflection;
-using System.Security.Cryptography;
-using System.Text;
 using TMPro;
 using UnityEngine;
 
@@ -137,12 +136,47 @@ internal static class Utils
         }
     }
 
-    internal static string HashString(string input)
+    /// <summary>
+    /// Loads a font asset from an embedded resource path and returns a TextMeshPro font asset instance.
+    /// </summary>
+    /// <remarks>The method attempts to locate and load the font resource from the executing assembly. If the
+    /// resource is not found or an error occurs during loading, null is returned and an error is logged. The caller
+    /// should verify the result before using the returned font asset.</remarks>
+    /// <param name="resourcePath">The path to the embedded font resource within the assembly. Must be a valid resource name; otherwise, the method
+    /// returns null.</param>
+    /// <returns>A TextMeshPro font asset created from the specified resource, or null if the resource cannot be found or loaded.</returns>
+    internal static TMP_FontAsset? LoadFontFromResources(string resourcePath)
     {
-        using MD5 md5 = MD5.Create();
-        byte[] inputBytes = Encoding.UTF8.GetBytes(input);
-        byte[] hashBytes = md5.ComputeHash(inputBytes);
-        return BitConverter.ToString(hashBytes).Replace("-", "").ToLower();
+        try
+        {
+            Assembly assembly = Assembly.GetExecutingAssembly();
+
+            using Stream stream = assembly.GetManifestResourceStream(resourcePath);
+            if (stream == null)
+            {
+                NightmarePlugin.Log.LogError($"Font resource not found: {resourcePath}");
+                return null;
+            }
+
+            string tempFileName = $"{Path.GetFileNameWithoutExtension(resourcePath)}_{Guid.NewGuid()}{Path.GetExtension(resourcePath)}";
+            string tempPath = Path.Combine(Application.temporaryCachePath, tempFileName);
+
+            using (FileStream fileStream = File.Create(tempPath))
+            {
+                stream.CopyTo(fileStream);
+            }
+
+            Font newFont = new(tempPath);
+            TMP_FontAsset fontAsset = TMP_FontAsset.CreateFontAsset(newFont);
+            File.Delete(tempPath);
+
+            return fontAsset;
+        }
+        catch (Exception ex)
+        {
+            NightmarePlugin.Log.LogError(ex);
+            return null;
+        }
     }
 
     internal static GameObject? FindInactive(string path)
@@ -205,6 +239,7 @@ internal static class Utils
         {
             noteTMP.gameObject.SetActive(true);
             noteTMP.SetText(note);
+            noteTMP.font = GUIAutoTranslator.GetFont(noteTMP.font);
         }
     }
 

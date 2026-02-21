@@ -14,6 +14,7 @@ internal static class Translator
     private const string LANG_PATH = "NightmareMode.Resources.Lang";
     private const SystemLanguage FALLBACK_LANGUAGE = SystemLanguage.English;
     private static Dictionary<SystemLanguage, LanguageData> _translations = [];
+    public static SystemLanguage CurrentLanguage => Application.systemLanguage;
 
     /// <summary>
     /// Initializes the translation system by loading all available language files
@@ -187,19 +188,17 @@ internal static class Translator
     /// <returns>The translated string, or a placeholder in the format "&lt;key&gt;" if not found.</returns>
     internal static string Get(string key)
     {
-        SystemLanguage currentLanguage = Application.systemLanguage;
-
-        if (_translations.TryGetValue(currentLanguage, out var languageData) &&
+        if (_translations.TryGetValue(CurrentLanguage, out var languageData) &&
             languageData.HasTranslation(key))
         {
             return languageData.keyValuePairs[key];
         }
 
-        if (currentLanguage != FALLBACK_LANGUAGE &&
+        if (CurrentLanguage != FALLBACK_LANGUAGE &&
             _translations.TryGetValue(FALLBACK_LANGUAGE, out var fallbackData) &&
             fallbackData.HasTranslation(key))
         {
-            NightmarePlugin.Log.LogWarning($"Missing translation '{key}' for {currentLanguage}, using fallback");
+            NightmarePlugin.Log.LogWarning($"Missing translation '{key}' for {CurrentLanguage}, using fallback");
             return fallbackData.keyValuePairs[key];
         }
 
@@ -243,55 +242,17 @@ internal static class Translator
     {
         return systemLanguage switch
         {
-            // Latin-based languages
             SystemLanguage.English => "en_US",
+            SystemLanguage.Spanish => "es_ES",
             SystemLanguage.French => "fr_FR",
             SystemLanguage.German => "de_DE",
-            SystemLanguage.Italian => "it_IT",
-            SystemLanguage.Spanish => "es_ES",
-            SystemLanguage.Portuguese => "pt_PT",
-            SystemLanguage.Dutch => "nl_NL",
-            SystemLanguage.Turkish => "tr_TR",
-            SystemLanguage.Polish => "pl_PL",
-            SystemLanguage.Czech => "cs_CZ",
-            SystemLanguage.Hungarian => "hu_HU",
-
-            // Korean
-            SystemLanguage.Korean => "ko_KR",
-
-            SystemLanguage.Afrikaans => "af_ZA",
-            SystemLanguage.Arabic => "ar_SA",
-            SystemLanguage.Basque => "eu_ES",
-            SystemLanguage.Belarusian => "be_BY",
-            SystemLanguage.Bulgarian => "bg_BG",
-            SystemLanguage.Catalan => "ca_ES",
-            SystemLanguage.Chinese => "zh_CN",
-            SystemLanguage.Danish => "da_DK",
-            SystemLanguage.Estonian => "et_EE",
-            SystemLanguage.Faroese => "fo_FO",
-            SystemLanguage.Finnish => "fi_FI",
-            SystemLanguage.Greek => "el_GR",
-            SystemLanguage.Hebrew => "he_IL",
-            SystemLanguage.Icelandic => "is_IS",
-            SystemLanguage.Indonesian => "id_ID",
-            SystemLanguage.Japanese => "ja_JP",
-            SystemLanguage.Latvian => "lv_LV",
-            SystemLanguage.Lithuanian => "lt_LT",
-            SystemLanguage.Norwegian => "no_NO",
-            SystemLanguage.Romanian => "ro_RO",
-            SystemLanguage.Russian => "ru_RU",
-            SystemLanguage.SerboCroatian => "sh_RS",
-            SystemLanguage.Slovak => "sk_SK",
-            SystemLanguage.Slovenian => "sl_SI",
-            SystemLanguage.Swedish => "sv_SE",
-            SystemLanguage.Thai => "th_TH",
-            SystemLanguage.Ukrainian => "uk_UA",
-            SystemLanguage.Vietnamese => "vi_VN",
             SystemLanguage.ChineseSimplified => "zh_CN",
-            SystemLanguage.ChineseTraditional => "zh_TW",
-            SystemLanguage.Unknown => "unknown",
-
-            _ => $"{systemLanguage.ToString().ToLower()}_XX"
+            SystemLanguage.Japanese => "ja_JP",
+            SystemLanguage.Korean => "ko_KR",
+            SystemLanguage.Russian => "ru_RU",
+            SystemLanguage.Portuguese => "pt_PT",
+            SystemLanguage.Italian => "it_IT",
+            _ => "none"
         };
     }
 }

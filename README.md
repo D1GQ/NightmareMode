@@ -20,7 +20,7 @@ Nightmare Mode is a comprehensive gameplay overhaul for **FNAF Rewritten 87** (a
 - **Unlock Shortcut** – Don't want to grind? Hold `Shift + U` to temporarily unlock all nights (resets after restart).
 
 ### 🛠️ **Easy Installation**
-No complicated setup—just extract, drop, and play.
+No complicated setup just extract, drop, and play.
 
 ---
 
@@ -41,7 +41,7 @@ No complicated setup—just extract, drop, and play.
 A: Nightmare Mode is designed as a standalone overhaul. Using it with other mods may cause conflicts.
 
 **Q: Will my progress in the original game be affected?**  
-A: No—your original save files remain untouched. Nightmare Mode uses separate profiles.
+A: No your original save files remain untouched. Nightmare Mode uses separate profiles.
 
 **Q: Can I suggest new features or report bugs?**  
 A: Yes! Please open an Issue on this repository with details.

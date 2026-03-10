@@ -51,7 +51,7 @@ A: Yes! Please open an Issue on this repository with details.
 ## 📄 Credits
 
 - **Original Game:** [FNAF Rewritten 87 on GameJolt](https://gamejolt.com/) | [Itch.io](https://itch.io/)
-- **Nightmare Mode:** Developed by @D1GQ
+- **Nightmare Mode:** Developed by [D1GQ](https://github.com/D1GQ)
 
 ## 🌟 Support
 

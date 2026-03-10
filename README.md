@@ -3,7 +3,7 @@
 > *"The night starts easy... but the madness doesn’t stay that way."*
 ![69589d11bb772](https://github.com/user-attachments/assets/267d3d4e-3d01-4ba2-9ce7-036efde1c6a9)
 
-Nightmare Mode is a comprehensive gameplay overhaul for **FNAF Rewritten 87** (a remake of FNAF 2). It doesn't just increase difficulty—it transforms the experience entirely by introducing **adaptive AI** that evolves throughout each night, creating a relentless and unpredictable survival horror challenge.
+Nightmare Mode is a dynamic difficulty overhaul for FNAF Rewritten 87 (a remake of FNAF 2), Nightmare Mode doesn’t just make the game harder, it adjust AI levels mid-shift. The first few nights ease you into the changes, but the longer you go, higher the animatronics levels rise, turning every night into a nightmare of unpredictability.  
 
 ---
 
@@ -41,25 +41,17 @@ No complicated setup just extract, drop, and play.
 A: Nightmare Mode is designed as a standalone overhaul. Using it with other mods may cause conflicts.
 
 **Q: Will my progress in the original game be affected?**  
-A: No your original save files remain untouched. Nightmare Mode uses separate profiles.
+A: No your original save files remain untouched. Nightmare Mode uses separate save files.
 
 **Q: Can I suggest new features or report bugs?**  
 A: Yes! Please open an Issue on this repository with details.
 
 ---
 
-## 📄 Credits & Acknowledgments
+## 📄 Credits
 
 - **Original Game:** [FNAF Rewritten 87 on GameJolt](https://gamejolt.com/) | [Itch.io](https://itch.io/)
 - **Nightmare Mode:** Developed by @D1GQ
-
----
-
-## ⚠️ Disclaimer
-
-This is a **fan-made modification** and is not affiliated with Scott Cawthon, Five Nights at Freddy's, or the original developers of FNAF Rewritten 87. All original game assets remain the property of their respective owners.
-
----
 
 ## 🌟 Support
 
@@ -69,5 +61,6 @@ If you enjoy Nightmare Mode, consider:
 - Supporting the original game developers
 
 ---
-
-> **Will you survive... or will the nightmare consume you?**
+> This is a **fan-made modification** and is not affiliated with Scott Cawthon, Five Nights at Freddy's, or the original developers of FNAF Rewritten 87. All original game assets remain the property of their respective owners.
+> 
+> **Will you survive all of the nights...**

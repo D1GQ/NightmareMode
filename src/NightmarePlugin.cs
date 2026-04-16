@@ -17,11 +17,11 @@ namespace NightmareMode;
 [BepInPlugin(ModInfo.MOD_GUID, ModInfo.MOD_NAME, ModInfo.MOD_VERSION)]
 internal class NightmarePlugin : BaseUnityPlugin
 {
-    internal static NightmarePlugin Instance { get; private set; }
+    internal static NightmarePlugin Instance { get; private set; } = null!;
 
     internal static bool ModEnabled { get; private set; } = ModInfo.DEBUG;
-    private static Harmony? Harmony;
-    internal static ManualLogSource Log => Instance._log;
+    private static Harmony? Harmony = null!;
+    internal static ManualLogSource Log => Instance._log!;
     private ManualLogSource? _log;
 
     private void Awake()
@@ -75,7 +75,7 @@ internal class NightmarePlugin : BaseUnityPlugin
             loading.tips = [];
             loading?.gameObject.SetActive(true);
             GameObject.Find("cinematic").SetActive(false);
-            Instance.StartCoroutine(CoSwitchMode());
+            ModManager.Instance.StartCoroutine(CoSwitchMode());
         }
     }
 

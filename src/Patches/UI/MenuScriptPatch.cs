@@ -1,4 +1,6 @@
-﻿using HarmonyLib;
+﻿#pragma warning disable CS0618
+
+using HarmonyLib;
 using NightmareMode.Helpers;
 using NightmareMode.Managers;
 using NightmareMode.Modules;
@@ -88,7 +90,10 @@ internal class MenuScriptPatch
         var sound = GameObject.Find("cinematic/Audio Source (12)");
         if (sound != null)
         {
-            var audioSource = sound.GetComponent<AudioSource>();
+            GameObject newSound = UnityEngine.Object.Instantiate(sound, sound.transform.parent);
+            newSound.SetActive(true);
+            UnityEngine.Object.Destroy(sound);
+            var audioSource = newSound.GetComponent<AudioSource>();
             audioSource.volume = 0.2f;
             audioSource.pitch = 2f;
         }

@@ -83,6 +83,7 @@ internal class MenuScriptPatch
         if (music != null)
         {
             var audioSource = music.GetComponent<AudioSource>();
+            audioSource.volume = 1f;
             audioSource.pitch = 0.6f;
         }
 

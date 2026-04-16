@@ -1,6 +1,6 @@
 ﻿using HarmonyLib;
 using NightmareMode.Data;
-using NightmareMode.Helpers;
+using NightmareMode.Utilities;
 using NightmareMode.Managers;
 using NightmareMode.Monos;
 using UnityEngine;

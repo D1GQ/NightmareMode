@@ -1,6 +1,6 @@
 ﻿using NightmareMode.Attributes;
 using NightmareMode.Enums;
-using NightmareMode.Helpers;
+using NightmareMode.Utilities;
 using NightmareMode.Interfaces;
 using NightmareMode.Modules;
 using NightmareMode.Monos;

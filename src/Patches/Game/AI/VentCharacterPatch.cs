@@ -1,5 +1,5 @@
 ﻿using HarmonyLib;
-using NightmareMode.Helpers;
+using NightmareMode.Utilities;
 using NightmareMode.Monos;
 using UnityEngine;
 

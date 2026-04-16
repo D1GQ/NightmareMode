@@ -1,6 +1,6 @@
 ﻿using NightmareMode.Data;
 using NightmareMode.Enums;
-using NightmareMode.Helpers;
+using NightmareMode.Utilities;
 using NightmareMode.Interfaces;
 
 namespace NightmareMode.Nights.Challenges;

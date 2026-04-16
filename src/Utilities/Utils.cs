@@ -7,7 +7,7 @@ using System.Reflection;
 using TMPro;
 using UnityEngine;
 
-namespace NightmareMode.Helpers;
+namespace NightmareMode.Utilities;
 
 internal static class Utils
 {

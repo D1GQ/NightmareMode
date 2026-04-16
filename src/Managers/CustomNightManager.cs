@@ -1,5 +1,5 @@
 ﻿using NightmareMode.Enums;
-using NightmareMode.Helpers;
+using NightmareMode.Utilities;
 using NightmareMode.Modules;
 using NightmareMode.Monos;
 using TMPro;

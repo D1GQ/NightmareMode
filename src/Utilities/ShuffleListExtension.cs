@@ -1,4 +1,4 @@
-﻿namespace NightmareMode.Helpers;
+﻿namespace NightmareMode.Utilities;
 
 /// <summary>
 /// Provides extension methods for shuffling collections using the Fisher-Yates algorithm.

@@ -1,7 +1,7 @@
 ﻿#pragma warning disable CS8602
 
 using NightmareMode.Enums;
-using NightmareMode.Helpers;
+using NightmareMode.Utilities;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;

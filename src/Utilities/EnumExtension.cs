@@ -1,6 +1,6 @@
 ﻿using NightmareMode.Enums;
 
-namespace NightmareMode.Helpers;
+namespace NightmareMode.Utilities;
 
 /// <summary>
 /// Provides extension methods for working with game-specific enumerations.

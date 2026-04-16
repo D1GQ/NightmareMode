@@ -1,4 +1,4 @@
-﻿using NightmareMode.Helpers;
+﻿using NightmareMode.Utilities;
 using NightmareMode.Interfaces;
 using NightmareMode.Monos;
 using TMPro;

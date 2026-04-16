@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace NightmareMode.Helpers;
+namespace NightmareMode.Utilities;
 
 /// <summary>
 /// Provides extension methods for Unity GameObject to simplify common transform operations.

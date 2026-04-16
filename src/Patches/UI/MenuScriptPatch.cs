@@ -1,7 +1,7 @@
 ﻿#pragma warning disable CS0618
 
 using HarmonyLib;
-using NightmareMode.Helpers;
+using NightmareMode.Utilities;
 using NightmareMode.Managers;
 using NightmareMode.Modules;
 using System.Collections;

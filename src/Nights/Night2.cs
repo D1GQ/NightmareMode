@@ -1,5 +1,5 @@
 ﻿using NightmareMode.Attributes;
-using NightmareMode.Helpers;
+using NightmareMode.Utilities;
 using NightmareMode.Interfaces;
 using NightmareMode.Managers;
 using NightmareMode.Modules;

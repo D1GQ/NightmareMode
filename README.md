@@ -44,7 +44,7 @@ Open an Issue on GitHub.
 
 ## Credits
 
-- **Original game:** FNAF Rewritten 87 on GameJolt / Itch.io
+- **Original game:** [FNAF Rewritten 87](https://dot-e26.itch.io/fnaf-rewritten-87) on Itch.io
 - **Mod:** Made by [D1GQ](https://github.com/D1GQ)
 
 ---
